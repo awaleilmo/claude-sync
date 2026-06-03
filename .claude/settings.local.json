@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -m venv .venv)",
+      "Bash(.venv/bin/pip install *)",
+      "Bash(.venv/bin/pytest -v)",
+      "Bash(.venv/bin/pytest -v --tb=short)",
+      "Bash(.venv/bin/python3 *)",
+      "Read(//tmp/demo-sync/**)",
+      "Bash(/home/awal/workspace/claude-sync/.venv/bin/claude-sync --version)",
+      "Bash(/home/awal/workspace/claude-sync/.venv/bin/claude-sync --help)",
+      "Bash(/home/awal/workspace/claude-sync/.venv/bin/claude-sync status *)",
+      "Bash(echo \"exit=$?\")",
+      "Bash(/home/awal/workspace/claude-sync/.venv/bin/claude-sync init *)",
+      "Bash(rm -rf /tmp/demo-sync)",
+      "Bash(/home/awal/workspace/claude-sync/.venv/bin/pytest -q)",
+      "Read(//home/awal/.claude/**)",
+      "Read(//proc/**)",
+      "Bash(mkdir /tmp/demo-sync)",
+      "Bash(HOME=/nonexistent /home/awal/workspace/claude-sync/.venv/bin/claude-sync status)",
+      "Bash(.venv/bin/pytest --tb=short)",
+      "Bash([ -d \"$HOME/.claude/$d\" ])",
+      "Bash(/home/awal/workspace/claude-sync/.venv/bin/claude-sync inspect *)",
+      "Bash(HOME=/nonexistent /home/awal/workspace/claude-sync/.venv/bin/claude-sync inspect)",
+      "Bash(.venv/bin/pytest)",
+      "Bash(/home/awal/workspace/claude-sync/.venv/bin/pytest -v)",
+      "Bash(.venv/bin/pytest -q)",
+      "Bash(.venv/bin/pytest tests/test_git_sync.py::test_init_repo_initializes_main_branch_via_init_defaultbranch -v --tb=long)",
+      "Bash(.venv/bin/pytest tests/test_git_sync.py::test_init_repo_creates_git_dir tests/test_git_sync.py::test_init_repo_initializes_main_branch_via_init_defaultbranch tests/test_git_sync.py::test_fetch_and_pull_fail_without_remote -q)",
+      "Bash(git -c init.defaultBranch=main init --initial-branch main /tmp/test-git2)",
+      "Bash(rm -rf /tmp/synctest)",
+      "Bash(/home/awal/workspace/claude-sync/.venv/bin/python3 -c ' *)",
+      "Bash(/home/awal/workspace/claude-sync/.venv/bin/python -m pytest tests/test_git_sync.py -v)",
+      "Bash(/home/awal/workspace/claude-sync/.venv/bin/python -m pytest)",
+      "Bash(.venv/bin/claude-sync *)",
+      "Bash(.venv/bin/ruff check *)",
+      "Bash(mkdir -p /tmp/empty-dir)",
+      "Bash(echo \"exit: $?\")"
+    ]
+  }
+}
