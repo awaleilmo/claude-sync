@@ -28,6 +28,3 @@ htmlcov/
 .vscode/
 *.swp
 *.swo
-
-# Claude Sync runtime
-.claude-sync/
