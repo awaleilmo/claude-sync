@@ -2,10 +2,10 @@
 
 A CLI tool to synchronize Claude Code sessions across devices using Git.
 
-> **Status:** Tahap 4 — Export manual. `init`, `status`, `inspect`, dan
-> `export` (copy `sessions`/`tasks`/`plans`/`session-env` ke
-> `.claude-sync/data/`) sudah diimplementasikan. Import dan Git sync
-> belum.
+> **Status:** Tahap 6 selesai. `init`, `status`, `inspect`, `export`,
+> `import` (dengan auto-backup), `push` (export → commit → push), dan
+> `pull` (fetch → pull → import) sudah diimplementasikan dan teruji.
+> Lihat [Autentikasi Git](#autentikasi-git-token-based) untuk setup token.
 
 ## Tujuan
 
@@ -42,7 +42,7 @@ Setelah terinstal, command `claude-sync` akan tersedia di terminal:
 claude-sync --help
 ```
 
-Perintah yang tersedia di Tahap 1:
+Perintah yang tersedia di Tahap 6:
 
 ### `claude-sync init`
 
@@ -152,6 +152,128 @@ Exporting to:   /home/user/project/.claude-sync/data
 Opsi tambahan:
 - `--claude-path PATH` — sumber override (lewati locator)
 
+### `claude-sync import`
+
+Restore isi `.claude-sync/data/` ke `~/.claude`. Sebelum menimpa,
+otomatis membuat backup `~/.claude.backup-YYYYMMDD-HHMMSS` agar
+data lama bisa di-restore kalau terjadi masalah.
+
+```bash
+claude-sync import
+```
+
+Output contoh:
+```
+Importing from: /home/user/project/.claude-sync/data
+Importing to:   /home/user/.claude
+Backup created at: /home/user/.claude.backup-20260603-134512
+
+                 Import Summary
+┏━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Subdir      ┃ Files ┃          Status          ┃
+┡━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ sessions    │    48 │       restored           │
+│ tasks       │     7 │       restored           │
+│ plans       │    10 │       restored           │
+│ session-env │    32 │       restored           │
+└─────────────┴───────┴──────────────────────────┘
+
+✓ Restored 97 files from data/
+✓ Backup kept at /home/user/.claude.backup-20260603-134512
+```
+
+Opsi tambahan:
+- `--claude-path PATH` — tujuan override (lewati locator)
+- `--no-backup` — lewati auto-backup (tidak disarankan)
+
+### `claude-sync push`
+
+Menjalankan `export` lalu commit + push ke remote Git. Memerlukan
+folder `.claude-sync/` sudah terinisialisasi dan merupakan repository
+Git dengan minimal satu remote.
+
+```bash
+claude-sync push
+```
+
+Alur:
+1. Jalankan `export` (sinkronkan `~/.claude` → `.claude-sync/data/`)
+2. `git add` + `git commit` (hanya jika ada perubahan)
+3. `git push` ke branch & remote yang sedang aktif
+
+Output contoh:
+```
+✓ Exported 97 files into data/
+✓ Committed 3 file(s) with message: claude-sync: export 97 files at 2026-06-03T13:45:12
+✓ Pushed to origin/main
+```
+
+Opsi tambahan:
+- `--message / -m TEXT` — custom commit message
+- `--no-export` — lewati export, langsung commit + push
+- `--claude-path PATH` — sumber export override
+
+### Autentikasi Git (Token-based)
+
+`push` dan `pull` memanggil `git` langsung, jadi **autentikasi mengikuti
+konfigurasi Git yang sudah ada di mesin Anda**. Karena `claude-sync` tidak
+membungkus prompt password, Anda harus memastikan Git sudah bisa
+berkomunikasi dengan remote sebelum menjalankan `push`/`pull`.
+
+Cara-cara yang umum dipakai:
+
+1. **Token GitHub (`ghp_*`, `github_pat_*`, dll) — paling umum**
+   Token bisa dipasang di URL remote, atau lebih aman lewat helper:
+
+   ```bash
+   # Opsi A: simpan kredensial via helper (disarankan)
+   git config --global credential.helper store
+   git push   # masukkan username + token satu kali, tersimpan untuk berikutnya
+   ```
+
+   ```bash
+   # Opsi B: embed token di URL remote (kurang aman, jangan di repo publik)
+   git remote set-url origin https://<TOKEN>@github.com/<user>/<repo>.git
+   ```
+
+   `claude-sync push`/`pull` akan otomatis memakai kredensial yang tersimpan
+   — **Anda tidak perlu mengetik token lagi setiap kali push/pull**, kecuali
+   helper tidak dikonfigurasi atau token expired.
+
+2. **SSH key** — kalau URL remote sudah `git@github.com:...`, Git akan
+   memakai `~/.ssh/id_*` secara otomatis.
+
+3. **GitHub CLI (`gh auth login`)** — setelah login, `gh` menulis
+   kredensial ke store Git sehingga `claude-sync` ikut memanfaatkannya.
+
+> ⚠️ **Catatan keamanan:** token di `https://<TOKEN>@github.com/...`
+> akan tersimpan di `.git/config` (plain text). Untuk mesin bersama atau
+> laptop yang sering di-clone ulang, gunakan `credential.helper` atau SSH.
+
+### `claude-sync pull`
+
+Menjalankan `git pull` lalu `import`. Aman dijalankan dari mana saja
+karena `git` yang memutuskan apakah working tree bersih.
+
+```bash
+claude-sync pull
+```
+
+Alur:
+1. `git pull` dari remote (fetch + merge/rebase)
+2. Jalankan `import` (sinkronkan `.claude-sync/data/` → `~/.claude`)
+
+Output contoh:
+```
+✓ Pulled from origin/main (2 commit(s))
+✓ Restored 12 files from data/
+✓ Backup kept at /home/user/.claude.backup-20260603-134530
+```
+
+Opsi tambahan:
+- `--no-import` — lewati import, hanya pull
+- `--claude-path PATH` — tujuan import override
+
 ## Cara Testing
 
 Jalankan test suite dengan:
@@ -173,13 +295,18 @@ claude-sync/
 │       │   ├── init.py             # `claude-sync init`
 │       │   ├── status.py           # `claude-sync status`
 │       │   ├── inspect.py          # `claude-sync inspect` (Tahap 3)
-│       │   └── export.py           # `claude-sync export` (Tahap 4)
+│       │   ├── export.py           # `claude-sync export` (Tahap 4)
+│       │   ├── import_cmd.py       # `claude-sync import` (Tahap 5)
+│       │   ├── push.py             # `claude-sync push` (Tahap 6)
+│       │   └── pull.py             # `claude-sync pull` (Tahap 6)
 │       └── utils/
 │           ├── __init__.py
 │           ├── config.py           # Path & manifest helpers
 │           ├── claude_locator.py   # `ClaudeLocator` (Tahap 2)
 │           ├── inspector.py        # `ClaudeInspector` (Tahap 3)
-│           └── exporter.py         # `ClaudeExporter` (Tahap 4)
+│           ├── exporter.py         # `ClaudeExporter` (Tahap 4)
+│           ├── importer.py         # `ClaudeImporter` (Tahap 5)
+│           └── git_sync.py         # `GitSync` helpers (Tahap 6)
 ├── tests/
 ├── pyproject.toml
 ├── README.md
@@ -192,5 +319,5 @@ claude-sync/
 - **Tahap 2** — Deteksi folder Claude Code (Linux/Windows/WSL) ✅
 - **Tahap 3** — Analisis struktur session Claude (`inspect`) ✅
 - **Tahap 4** — Export manual (`export`) ✅
-- **Tahap 5** — Import manual
-- **Tahap 6** — Integrasi Git (`push`, `pull`)
+- **Tahap 5** — Import manual (`import`) ✅
+- **Tahap 6** — Integrasi Git (`push`, `pull`) ✅

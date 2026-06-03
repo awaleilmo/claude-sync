@@ -35,7 +35,10 @@
       "Bash(.venv/bin/claude-sync *)",
       "Bash(.venv/bin/ruff check *)",
       "Bash(mkdir -p /tmp/empty-dir)",
-      "Bash(echo \"exit: $?\")"
+      "Bash(echo \"exit: $?\")",
+      "Bash(pip show *)",
+      "Bash(pip install *)",
+      "Bash(python -m pytest -v)"
     ]
   }
 }
