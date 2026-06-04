@@ -30,11 +30,24 @@ from typing import Iterable
 # in `inspector.py` (TRACKED_SUBDIRS) but exporting it would copy
 # potentially huge, project-specific state we don't yet know how to
 # merge. We can revisit once project filtering lands in Tahap 5+.
+# Added in Tahap 7B: `memory` contains user/memory data like MEMORY.md,
+# user_profile.md, etc. that are useful to sync across devices.
 EXPORT_SUBDIRS: tuple[str, ...] = (
     "sessions",
     "tasks",
     "plans",
     "session-env",
+    "projects",
+    "memory",
+)
+
+# Individual files at the root of `.claude/` that are mirrored during export.
+# These files are copied directly to `data_root/` (not into a subdirectory).
+# Added in Tahap 7B.
+EXPORT_FILES: tuple[str, ...] = (
+    "history.jsonl",
+    "CLAUDE.md",
+    "settings.json",
 )
 
 # Default location of the exported payload, relative to the sync
@@ -52,6 +65,9 @@ class ExportReport:
     copied: dict[str, int] = field(default_factory=dict)
     skipped: tuple[str, ...] = ()
     file_count: int = 0
+    # Added in Tahap 7B for individual file tracking.
+    copied_files: dict[str, bool] = field(default_factory=dict)
+    skipped_files: tuple[str, ...] = ()
 
     @property
     def copied_subdirs(self) -> tuple[str, ...]:
@@ -107,9 +123,10 @@ class ClaudeExporter:
             shutil.rmtree(self.data_root)
         self.data_root.mkdir(parents=True, exist_ok=True)
 
-        # Pre-walk to count files. We use the same recursive count
-        # for every subdir so partial progress numbers stay honest
-        # even if we later add a "report after each subdir" feature.
+        # --- Copy subdirectories ---
+        # We use the same recursive count for every subdir so partial
+        # progress numbers stay honest even if we later add a "report
+        # after each subdir" feature.
         total_files = 0
         for name in self.subdirs:
             source = self.claude_path / name
@@ -126,6 +143,20 @@ class ClaudeExporter:
             report.copied[name] = count
             total_files += count
 
+        # --- Copy individual files ---
+        # Individual files live at the root of `.claude/`. They are
+        # copied directly into `data_root/` (not into a subdirectory).
+        for fname in EXPORT_FILES:
+            src_file = self.claude_path / fname
+            dst_file = self.data_root / fname
+            if src_file.is_file():
+                shutil.copy2(src_file, dst_file)
+                report.copied_files[fname] = True
+                total_files += 1
+            else:
+                report.skipped_files = (*report.skipped_files, fname)
+
+        report.skipped_files = tuple(set(report.skipped_files))
         report.file_count = total_files
         return report
 

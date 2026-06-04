@@ -135,6 +135,15 @@ def import_cmd(  # noqa: A001 — Typer binds the public name `import_data`.
             table.add_row(name, "—", "[yellow]skipped (no data)[/yellow]")
 
     console.print(table)
+
+    # Individual files section (Tahap 6b)
+    if report.restored_files or report.skipped_files:
+        console.print("\n[bold]Individual Files:[/bold]")
+        for f in report.restored_files:
+            console.print(f"  [green]✓[/green] {f}")
+        for f in report.skipped_files:
+            console.print(f"  [yellow]•[/yellow] {f} [dim](skipped, not in export)[/dim]")
+
     console.print(
         f"\n[bold green]✓[/bold green] Imported {report.file_count} files "
         f"from [bold]{DATA_SUBDIR}/[/bold]"

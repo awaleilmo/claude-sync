@@ -51,7 +51,8 @@ def test_import_restores_all_subdirs_and_reports_count(tmp_path: Path) -> None:
     assert report.backup_path is None
     assert report.restored == {"sessions": 3, "tasks": 2, "plans": 4, "session-env": 1}
     assert report.file_count == 10
-    assert report.skipped == ()
+    # memory and projects are in EXPORT_SUBDIRS but absent from data/
+    assert set(report.skipped) == {"memory", "projects"}
     assert (target / "sessions").is_dir()
     assert (target / "tasks").is_dir()
     assert (target / "plans").is_dir()
@@ -178,11 +179,12 @@ def test_import_skips_subdirs_missing_from_data(tmp_path: Path) -> None:
 
     report = ClaudeImporter(target, project).import_data()
 
-    # `tasks` and `plans` are absent from data/ and were wiped with the
-    # old target, so they're not in the report at all (the spec is
-    # silent on restoring empty placeholders; we keep it simple).
+    # `tasks`, `plans`, `session-env`, `memory`, and `projects` are absent
+    # from data/ and were wiped with the old target, so they're not in the
+    # report at all (the spec is silent on restoring empty placeholders;
+    # we keep it simple).
     assert report.restored == {"sessions": 1}
-    assert set(report.skipped) == {"tasks", "plans", "session-env"}
+    assert set(report.skipped) == {"tasks", "plans", "session-env", "memory", "projects"}
     assert (target / "sessions" / "f-0.txt").is_file()
     assert not (target / "tasks").exists()
 

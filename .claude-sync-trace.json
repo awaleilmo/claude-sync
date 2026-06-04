@@ -1,0 +1,2306 @@
+{
+  "root": "/home/awal/.claude",
+  "timestamp": 1780560638.794632,
+  "files": {
+    "history.jsonl": {
+      "size": 2732,
+      "mtime": 1780559553.0243618,
+      "relative_path": "history.jsonl"
+    },
+    ".last-cleanup": {
+      "size": 24,
+      "mtime": 1780560173.8201272,
+      "relative_path": ".last-cleanup"
+    },
+    "settings.json": {
+      "size": 623,
+      "mtime": 1780560319.0409486,
+      "relative_path": "settings.json"
+    },
+    "CLAUDE.md": {
+      "size": 694,
+      "mtime": 1780075792.6558301,
+      "relative_path": "CLAUDE.md"
+    },
+    "ide/41724.lock": {
+      "size": 192,
+      "mtime": 1780558603.03724,
+      "relative_path": "ide/41724.lock"
+    },
+    "paste-cache/450a38327e6b90a1.txt": {
+      "size": 1298,
+      "mtime": 1780558823.8123088,
+      "relative_path": "paste-cache/450a38327e6b90a1.txt"
+    },
+    "paste-cache/f5082fcc4173c0e6.txt": {
+      "size": 1251,
+      "mtime": 1780558860.0797293,
+      "relative_path": "paste-cache/f5082fcc4173c0e6.txt"
+    },
+    "paste-cache/33c2f2a2b0a9911d.txt": {
+      "size": 4974,
+      "mtime": 1780455709.1328266,
+      "relative_path": "paste-cache/33c2f2a2b0a9911d.txt"
+    },
+    "shell-snapshots/snapshot-bash-1780560319074-qijstm.sh": {
+      "size": 6008,
+      "mtime": 1780560319.1406152,
+      "relative_path": "shell-snapshots/snapshot-bash-1780560319074-qijstm.sh"
+    },
+    "memory/MEMORY.md": {
+      "size": 626,
+      "mtime": 1780075792.6558301,
+      "relative_path": "memory/MEMORY.md"
+    },
+    "memory/feedback_style.md": {
+      "size": 508,
+      "mtime": 1780075792.6598063,
+      "relative_path": "memory/feedback_style.md"
+    },
+    "memory/user_profile.md": {
+      "size": 422,
+      "mtime": 1780075792.6598063,
+      "relative_path": "memory/user_profile.md"
+    },
+    "sessions/25977.json": {
+      "size": 239,
+      "mtime": 1780559610.5506809,
+      "relative_path": "sessions/25977.json"
+    },
+    "plugins/known_marketplaces.json": {
+      "size": 274,
+      "mtime": 1780455616.4206169,
+      "relative_path": "plugins/known_marketplaces.json"
+    },
+    "backups/.claude.json.backup.1780558816661": {
+      "size": 4114,
+      "mtime": 1780558816.6594934,
+      "relative_path": "backups/.claude.json.backup.1780558816661"
+    },
+    "backups/.claude.json.backup.1780558958523": {
+      "size": 4232,
+      "mtime": 1780558958.5169654,
+      "relative_path": "backups/.claude.json.backup.1780558958523"
+    },
+    "backups/.claude.json.backup.1780558892959": {
+      "size": 4167,
+      "mtime": 1780558892.9558747,
+      "relative_path": "backups/.claude.json.backup.1780558892959"
+    },
+    "backups/.claude.json.backup.1780559527201": {
+      "size": 4558,
+      "mtime": 1780559527.199231,
+      "relative_path": "backups/.claude.json.backup.1780559527201"
+    },
+    "backups/.claude.json.backup.1780559261729": {
+      "size": 4488,
+      "mtime": 1780559261.7244678,
+      "relative_path": "backups/.claude.json.backup.1780559261729"
+    },
+    "tasks/b1a65801-9581-4070-b3d2-e494eb5b3997/.lock": {
+      "size": 0,
+      "mtime": 1780459991.5625584,
+      "relative_path": "tasks/b1a65801-9581-4070-b3d2-e494eb5b3997/.lock"
+    },
+    "tasks/b1a65801-9581-4070-b3d2-e494eb5b3997/.highwatermark": {
+      "size": 1,
+      "mtime": 1780469700.8664882,
+      "relative_path": "tasks/b1a65801-9581-4070-b3d2-e494eb5b3997/.highwatermark"
+    },
+    "plugins/marketplaces/claude-plugins-official/.gitignore": {
+      "size": 19,
+      "mtime": 1780455616.1926274,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/.gitignore"
+    },
+    "plugins/marketplaces/claude-plugins-official/README.md": {
+      "size": 3165,
+      "mtime": 1780455616.1926274,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.1926274,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/.gcs-sha": {
+      "size": 40,
+      "mtime": 1780455616.4166172,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/.gcs-sha"
+    },
+    "plugins/marketplaces/claude-plugins-official/.claude-plugin/marketplace.json": {
+      "size": 119105,
+      "mtime": 1780455616.1926274,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/.claude-plugin/marketplace.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/typescript-lsp/README.md": {
+      "size": 692,
+      "mtime": 1780455616.4166172,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/typescript-lsp/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/typescript-lsp/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.4166172,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/typescript-lsp/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/clangd-lsp/README.md": {
+      "size": 780,
+      "mtime": 1780455616.2486248,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/clangd-lsp/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/clangd-lsp/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.2486248,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/clangd-lsp/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/ralph-loop/README.md": {
+      "size": 6054,
+      "mtime": 1780455616.3886182,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/ralph-loop/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/ralph-loop/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.3886182,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/ralph-loop/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/learning-output-style/README.md": {
+      "size": 4687,
+      "mtime": 1780455616.3166218,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/learning-output-style/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/learning-output-style/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.3166218,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/learning-output-style/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/example-plugin/.mcp.json": {
+      "size": 91,
+      "mtime": 1780455616.2886229,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/example-plugin/.mcp.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/example-plugin/README.md": {
+      "size": 1881,
+      "mtime": 1780455616.2886229,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/example-plugin/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/example-plugin/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.2886229,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/example-plugin/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/README.md": {
+      "size": 14590,
+      "mtime": 1780455616.3526201,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.3486202,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/README.md": {
+      "size": 1547,
+      "mtime": 1780455616.3286211,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.3286211,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/feature-dev/README.md": {
+      "size": 11697,
+      "mtime": 1780455616.2926228,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/feature-dev/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/feature-dev/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.2926228,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/feature-dev/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/pyright-lsp/README.md": {
+      "size": 564,
+      "mtime": 1780455616.3886182,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/pyright-lsp/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/pyright-lsp/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.3886182,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/pyright-lsp/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/claude-md-management/claude-md-improver-example.png": {
+      "size": 518778,
+      "mtime": 1780455616.2606242,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/claude-md-management/claude-md-improver-example.png"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/claude-md-management/revise-claude-md-example.png": {
+      "size": 555521,
+      "mtime": 1780455616.2606242,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/claude-md-management/revise-claude-md-example.png"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/claude-md-management/README.md": {
+      "size": 1084,
+      "mtime": 1780455616.2566245,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/claude-md-management/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/claude-md-management/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.2566245,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/claude-md-management/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/mcp-tunnels/README.md": {
+      "size": 4947,
+      "mtime": 1780455616.3406205,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/mcp-tunnels/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/mcp-tunnels/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.3406205,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/mcp-tunnels/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/csharp-lsp/README.md": {
+      "size": 486,
+      "mtime": 1780455616.2806234,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/csharp-lsp/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/csharp-lsp/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.2806234,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/csharp-lsp/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/jdtls-lsp/README.md": {
+      "size": 811,
+      "mtime": 1780455616.3166218,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/jdtls-lsp/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/jdtls-lsp/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.3166218,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/jdtls-lsp/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/explanatory-output-style/README.md": {
+      "size": 2470,
+      "mtime": 1780455616.2926228,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/explanatory-output-style/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/explanatory-output-style/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.2926228,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/explanatory-output-style/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/ruby-lsp/README.md": {
+      "size": 535,
+      "mtime": 1780455616.3926182,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/ruby-lsp/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/ruby-lsp/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.3926182,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/ruby-lsp/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/README.md": {
+      "size": 7219,
+      "mtime": 1780455616.396618,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.396618,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/lua-lsp/README.md": {
+      "size": 705,
+      "mtime": 1780455616.3206215,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/lua-lsp/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/lua-lsp/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.3206215,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/lua-lsp/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/README.md": {
+      "size": 1192,
+      "mtime": 1780455616.3206215,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.3206215,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/php-lsp/README.md": {
+      "size": 436,
+      "mtime": 1780455616.3406205,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/php-lsp/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/php-lsp/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.3406205,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/php-lsp/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup/README.md": {
+      "size": 1015,
+      "mtime": 1780455616.2526248,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup/automation-recommender-example.png": {
+      "size": 545204,
+      "mtime": 1780455616.2526248,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup/automation-recommender-example.png"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.2526248,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit/README.md": {
+      "size": 7528,
+      "mtime": 1780455616.3806188,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.3806188,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/swift-lsp/README.md": {
+      "size": 602,
+      "mtime": 1780455616.4166172,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/swift-lsp/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/swift-lsp/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.4166172,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/swift-lsp/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/README.md": {
+      "size": 264,
+      "mtime": 1780455616.4046175,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.4046175,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/cwc-makers/README.md": {
+      "size": 1941,
+      "mtime": 1780455616.2846231,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/cwc-makers/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/cwc-makers/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.2846231,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/cwc-makers/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/code-simplifier/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.2766235,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/code-simplifier/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/kotlin-lsp/README.md": {
+      "size": 306,
+      "mtime": 1780455616.3166218,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/kotlin-lsp/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/kotlin-lsp/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.3166218,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/kotlin-lsp/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/frontend-design/README.md": {
+      "size": 977,
+      "mtime": 1780455616.3006225,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/frontend-design/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/frontend-design/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.3006225,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/frontend-design/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/rust-analyzer-lsp/README.md": {
+      "size": 701,
+      "mtime": 1780455616.396618,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/rust-analyzer-lsp/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/rust-analyzer-lsp/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.396618,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/rust-analyzer-lsp/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/playground/README.md": {
+      "size": 1258,
+      "mtime": 1780455616.3406205,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/playground/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/playground/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.3406205,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/playground/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/session-report/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.4006178,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/session-report/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/gopls-lsp/README.md": {
+      "size": 473,
+      "mtime": 1780455616.3006225,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/gopls-lsp/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/gopls-lsp/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.3006225,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/gopls-lsp/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/hookify/.gitignore": {
+      "size": 291,
+      "mtime": 1780455616.3046222,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/hookify/.gitignore"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/hookify/README.md": {
+      "size": 7710,
+      "mtime": 1780455616.3046222,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/hookify/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/hookify/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.3046222,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/hookify/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/commit-commands/README.md": {
+      "size": 5908,
+      "mtime": 1780455616.2766235,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/commit-commands/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/commit-commands/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.2766235,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/commit-commands/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/README.md": {
+      "size": 9203,
+      "mtime": 1780455616.2686238,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.264624,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/code-review/README.md": {
+      "size": 7321,
+      "mtime": 1780455616.2726238,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/code-review/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/code-review/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.2726238,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/code-review/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/agent-sdk-dev/README.md": {
+      "size": 6397,
+      "mtime": 1780455616.244625,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/agent-sdk-dev/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/agent-sdk-dev/LICENSE": {
+      "size": 11358,
+      "mtime": 1780455616.244625,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/agent-sdk-dev/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/agent-sdk-dev/agents/agent-sdk-verifier-py.md": {
+      "size": 5206,
+      "mtime": 1780455616.244625,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/agent-sdk-dev/agents/agent-sdk-verifier-py.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/agent-sdk-dev/agents/agent-sdk-verifier-ts.md": {
+      "size": 5419,
+      "mtime": 1780455616.244625,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/agent-sdk-dev/agents/agent-sdk-verifier-ts.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/agent-sdk-dev/.claude-plugin/plugin.json": {
+      "size": 167,
+      "mtime": 1780455616.244625,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/agent-sdk-dev/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/agent-sdk-dev/commands/new-sdk-app.md": {
+      "size": 7846,
+      "mtime": 1780455616.244625,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/agent-sdk-dev/commands/new-sdk-app.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/code-review/.claude-plugin/plugin.json": {
+      "size": 234,
+      "mtime": 1780455616.2726238,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/code-review/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/code-review/commands/code-review.md": {
+      "size": 7422,
+      "mtime": 1780455616.2726238,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/code-review/commands/code-review.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/agents/security-auditor.md": {
+      "size": 2597,
+      "mtime": 1780455616.2686238,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/agents/security-auditor.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/agents/architecture-critic.md": {
+      "size": 1673,
+      "mtime": 1780455616.2686238,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/agents/architecture-critic.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/agents/legacy-analyst.md": {
+      "size": 2026,
+      "mtime": 1780455616.2686238,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/agents/legacy-analyst.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/agents/test-engineer.md": {
+      "size": 1787,
+      "mtime": 1780455616.2686238,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/agents/test-engineer.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/agents/business-rules-extractor.md": {
+      "size": 2182,
+      "mtime": 1780455616.2686238,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/agents/business-rules-extractor.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/.claude-plugin/plugin.json": {
+      "size": 341,
+      "mtime": 1780455616.264624,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/commands/modernize-reimagine.md": {
+      "size": 3787,
+      "mtime": 1780455616.2726238,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/commands/modernize-reimagine.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/commands/modernize-transform.md": {
+      "size": 3031,
+      "mtime": 1780455616.2726238,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/commands/modernize-transform.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/commands/modernize-map.md": {
+      "size": 4868,
+      "mtime": 1780455616.2726238,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/commands/modernize-map.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/commands/modernize-harden.md": {
+      "size": 2690,
+      "mtime": 1780455616.2726238,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/commands/modernize-harden.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/commands/modernize-assess.md": {
+      "size": 6790,
+      "mtime": 1780455616.2686238,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/commands/modernize-assess.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/commands/modernize-extract-rules.md": {
+      "size": 3278,
+      "mtime": 1780455616.2726238,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/commands/modernize-extract-rules.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/commands/modernize-brief.md": {
+      "size": 2446,
+      "mtime": 1780455616.2686238,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/commands/modernize-brief.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/commit-commands/.claude-plugin/plugin.json": {
+      "size": 236,
+      "mtime": 1780455616.2766235,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/commit-commands/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/commit-commands/commands/clean_gone.md": {
+      "size": 1865,
+      "mtime": 1780455616.2766235,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/commit-commands/commands/clean_gone.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/commit-commands/commands/commit-push-pr.md": {
+      "size": 796,
+      "mtime": 1780455616.2766235,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/commit-commands/commands/commit-push-pr.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/commit-commands/commands/commit.md": {
+      "size": 624,
+      "mtime": 1780455616.2806234,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/commit-commands/commands/commit.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/hookify/hooks/posttooluse.py": {
+      "size": 1622,
+      "mtime": 1780455616.3086221,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/hookify/hooks/posttooluse.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/hookify/hooks/hooks.json": {
+      "size": 1036,
+      "mtime": 1780455616.3086221,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/hookify/hooks/hooks.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/hookify/hooks/pretooluse.py": {
+      "size": 1852,
+      "mtime": 1780455616.3086221,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/hookify/hooks/pretooluse.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/hookify/hooks/stop.py": {
+      "size": 1403,
+      "mtime": 1780455616.3086221,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/hookify/hooks/stop.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/hookify/hooks/__init__.py": {
+      "size": 0,
+      "mtime": 1780455616.3086221,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/hookify/hooks/__init__.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/hookify/hooks/userpromptsubmit.py": {
+      "size": 1389,
+      "mtime": 1780455616.3086221,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/hookify/hooks/userpromptsubmit.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/hookify/matchers/__init__.py": {
+      "size": 0,
+      "mtime": 1780455616.3126218,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/hookify/matchers/__init__.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/hookify/core/config_loader.py": {
+      "size": 9690,
+      "mtime": 1780455616.3046222,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/hookify/core/config_loader.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/hookify/core/__init__.py": {
+      "size": 0,
+      "mtime": 1780455616.3046222,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/hookify/core/__init__.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/hookify/core/rule_engine.py": {
+      "size": 10711,
+      "mtime": 1780455616.3046222,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/hookify/core/rule_engine.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/hookify/utils/__init__.py": {
+      "size": 0,
+      "mtime": 1780455616.3166218,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/hookify/utils/__init__.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/hookify/agents/conversation-analyzer.md": {
+      "size": 5625,
+      "mtime": 1780455616.3046222,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/hookify/agents/conversation-analyzer.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/hookify/examples/console-log-warning.local.md": {
+      "size": 315,
+      "mtime": 1780455616.3086221,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/hookify/examples/console-log-warning.local.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/hookify/examples/sensitive-files-warning.local.md": {
+      "size": 421,
+      "mtime": 1780455616.3086221,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/hookify/examples/sensitive-files-warning.local.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/hookify/examples/require-tests-stop.local.md": {
+      "size": 500,
+      "mtime": 1780455616.3086221,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/hookify/examples/require-tests-stop.local.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/hookify/examples/dangerous-rm.local.md": {
+      "size": 278,
+      "mtime": 1780455616.3086221,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/hookify/examples/dangerous-rm.local.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/hookify/.claude-plugin/plugin.json": {
+      "size": 210,
+      "mtime": 1780455616.3006225,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/hookify/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/hookify/commands/configure.md": {
+      "size": 2863,
+      "mtime": 1780455616.3046222,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/hookify/commands/configure.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/hookify/commands/help.md": {
+      "size": 4624,
+      "mtime": 1780455616.3046222,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/hookify/commands/help.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/hookify/commands/hookify.md": {
+      "size": 7667,
+      "mtime": 1780455616.3046222,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/hookify/commands/hookify.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/hookify/commands/list.md": {
+      "size": 2020,
+      "mtime": 1780455616.3046222,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/hookify/commands/list.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/hookify/skills/writing-rules/SKILL.md": {
+      "size": 8423,
+      "mtime": 1780455616.3126218,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/hookify/skills/writing-rules/SKILL.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/session-report/skills/session-report/template.html": {
+      "size": 26382,
+      "mtime": 1780455616.4046175,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/session-report/skills/session-report/template.html"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/session-report/skills/session-report/analyze-sessions.mjs": {
+      "size": 28225,
+      "mtime": 1780455616.4046175,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/session-report/skills/session-report/analyze-sessions.mjs"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/session-report/skills/session-report/SKILL.md": {
+      "size": 3149,
+      "mtime": 1780455616.4046175,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/session-report/skills/session-report/SKILL.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/playground/.claude-plugin/plugin.json": {
+      "size": 277,
+      "mtime": 1780455616.3406205,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/playground/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/playground/skills/playground/SKILL.md": {
+      "size": 3824,
+      "mtime": 1780455616.3446205,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/playground/skills/playground/SKILL.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/playground/skills/playground/templates/diff-review.md": {
+      "size": 5733,
+      "mtime": 1780455616.3486202,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/playground/skills/playground/templates/diff-review.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/playground/skills/playground/templates/data-explorer.md": {
+      "size": 2817,
+      "mtime": 1780455616.3486202,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/playground/skills/playground/templates/data-explorer.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/playground/skills/playground/templates/design-playground.md": {
+      "size": 2719,
+      "mtime": 1780455616.3486202,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/playground/skills/playground/templates/design-playground.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/playground/skills/playground/templates/document-critique.md": {
+      "size": 5154,
+      "mtime": 1780455616.3486202,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/playground/skills/playground/templates/document-critique.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/playground/skills/playground/templates/concept-map.md": {
+      "size": 3644,
+      "mtime": 1780455616.3486202,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/playground/skills/playground/templates/concept-map.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/playground/skills/playground/templates/code-map.md": {
+      "size": 6196,
+      "mtime": 1780455616.3486202,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/playground/skills/playground/templates/code-map.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/frontend-design/.claude-plugin/plugin.json": {
+      "size": 180,
+      "mtime": 1780455616.3006225,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/frontend-design/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/frontend-design/skills/frontend-design/SKILL.md": {
+      "size": 4274,
+      "mtime": 1780455616.3006225,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/frontend-design/skills/frontend-design/SKILL.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/code-simplifier/agents/code-simplifier.md": {
+      "size": 3129,
+      "mtime": 1780455616.2766235,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/code-simplifier/agents/code-simplifier.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/code-simplifier/.claude-plugin/plugin.json": {
+      "size": 271,
+      "mtime": 1780455616.2766235,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/code-simplifier/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/cwc-makers/.claude-plugin/plugin.json": {
+      "size": 649,
+      "mtime": 1780455616.2846231,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/cwc-makers/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/cwc-makers/commands/maker-setup.md": {
+      "size": 1396,
+      "mtime": 1780455616.2846231,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/cwc-makers/commands/maker-setup.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/cwc-makers/skills/m5-onboard/SKILL.md": {
+      "size": 23913,
+      "mtime": 1780455616.2846231,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/cwc-makers/skills/m5-onboard/SKILL.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/cwc-makers/skills/cardputer-buddy/SKILL.md": {
+      "size": 1887,
+      "mtime": 1780455616.2846231,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/cwc-makers/skills/cardputer-buddy/SKILL.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/.claude-plugin/plugin.json": {
+      "size": 378,
+      "mtime": 1780455616.4046175,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/LICENSE.txt": {
+      "size": 11357,
+      "mtime": 1780455616.4046175,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/LICENSE.txt"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/SKILL.md": {
+      "size": 33168,
+      "mtime": 1780455616.4046175,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/SKILL.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/scripts/aggregate_benchmark.py": {
+      "size": 14386,
+      "mtime": 1780455616.4126172,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/scripts/aggregate_benchmark.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/scripts/__init__.py": {
+      "size": 0,
+      "mtime": 1780455616.4126172,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/scripts/__init__.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/scripts/run_loop.py": {
+      "size": 13605,
+      "mtime": 1780455616.4166172,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/scripts/run_loop.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/scripts/quick_validate.py": {
+      "size": 3972,
+      "mtime": 1780455616.4166172,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/scripts/quick_validate.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/scripts/package_skill.py": {
+      "size": 4234,
+      "mtime": 1780455616.4126172,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/scripts/package_skill.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/scripts/generate_report.py": {
+      "size": 12847,
+      "mtime": 1780455616.4126172,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/scripts/generate_report.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/scripts/improve_description.py": {
+      "size": 11116,
+      "mtime": 1780455616.4126172,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/scripts/improve_description.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/scripts/utils.py": {
+      "size": 1661,
+      "mtime": 1780455616.4166172,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/scripts/utils.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/scripts/run_eval.py": {
+      "size": 11464,
+      "mtime": 1780455616.4166172,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/scripts/run_eval.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/eval-viewer/generate_review.py": {
+      "size": 16365,
+      "mtime": 1780455616.4126172,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/eval-viewer/generate_review.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/eval-viewer/viewer.html": {
+      "size": 44998,
+      "mtime": 1780455616.4126172,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/eval-viewer/viewer.html"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/assets/eval_review.html": {
+      "size": 7058,
+      "mtime": 1780455616.4086175,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/assets/eval_review.html"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/agents/grader.md": {
+      "size": 9049,
+      "mtime": 1780455616.4086175,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/agents/grader.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/agents/analyzer.md": {
+      "size": 10376,
+      "mtime": 1780455616.4086175,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/agents/analyzer.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/agents/comparator.md": {
+      "size": 7287,
+      "mtime": 1780455616.4086175,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/agents/comparator.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/references/schemas.md": {
+      "size": 12061,
+      "mtime": 1780455616.4126172,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/references/schemas.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit/agents/type-design-analyzer.md": {
+      "size": 4999,
+      "mtime": 1780455616.3846185,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit/agents/type-design-analyzer.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit/agents/silent-failure-hunter.md": {
+      "size": 7807,
+      "mtime": 1780455616.3846185,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit/agents/silent-failure-hunter.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit/agents/code-simplifier.md": {
+      "size": 5292,
+      "mtime": 1780455616.3806188,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit/agents/code-simplifier.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit/agents/comment-analyzer.md": {
+      "size": 4925,
+      "mtime": 1780455616.3806188,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit/agents/comment-analyzer.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit/agents/pr-test-analyzer.md": {
+      "size": 4560,
+      "mtime": 1780455616.3846185,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit/agents/pr-test-analyzer.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit/agents/code-reviewer.md": {
+      "size": 3635,
+      "mtime": 1780455616.3806188,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit/agents/code-reviewer.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit/.claude-plugin/plugin.json": {
+      "size": 266,
+      "mtime": 1780455616.3806188,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit/commands/review-pr.md": {
+      "size": 4997,
+      "mtime": 1780455616.3846185,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit/commands/review-pr.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup/.claude-plugin/plugin.json": {
+      "size": 273,
+      "mtime": 1780455616.2526248,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup/skills/claude-automation-recommender/SKILL.md": {
+      "size": 10995,
+      "mtime": 1780455616.2526248,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup/skills/claude-automation-recommender/SKILL.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup/skills/claude-automation-recommender/references/plugins-reference.md": {
+      "size": 3016,
+      "mtime": 1780455616.2566245,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup/skills/claude-automation-recommender/references/plugins-reference.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup/skills/claude-automation-recommender/references/skills-reference.md": {
+      "size": 9612,
+      "mtime": 1780455616.2566245,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup/skills/claude-automation-recommender/references/skills-reference.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup/skills/claude-automation-recommender/references/subagent-templates.md": {
+      "size": 5049,
+      "mtime": 1780455616.2566245,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup/skills/claude-automation-recommender/references/subagent-templates.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup/skills/claude-automation-recommender/references/mcp-servers.md": {
+      "size": 8292,
+      "mtime": 1780455616.2566245,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup/skills/claude-automation-recommender/references/mcp-servers.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup/skills/claude-automation-recommender/references/hooks-patterns.md": {
+      "size": 6316,
+      "mtime": 1780455616.2566245,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup/skills/claude-automation-recommender/references/hooks-patterns.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/.claude-plugin/plugin.json": {
+      "size": 356,
+      "mtime": 1780455616.3206215,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/SKILL.md": {
+      "size": 19961,
+      "mtime": 1780455616.3246212,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/SKILL.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/evals/trigger_eval.json": {
+      "size": 2008,
+      "mtime": 1780455616.3246212,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/evals/trigger_eval.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/scripts/compile_pdf.sh": {
+      "size": 1485,
+      "mtime": 1780455616.3286211,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/scripts/compile_pdf.sh"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/scripts/check_latex.sh": {
+      "size": 205,
+      "mtime": 1780455616.3286211,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/scripts/check_latex.sh"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/references/solver_heuristics.md": {
+      "size": 5998,
+      "mtime": 1780455616.3246212,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/references/solver_heuristics.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/references/verifier_patterns.md": {
+      "size": 8284,
+      "mtime": 1780455616.3246212,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/references/verifier_patterns.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/references/adversarial_prompts.md": {
+      "size": 12571,
+      "mtime": 1780455616.3246212,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/references/adversarial_prompts.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/references/presentation_prompts.md": {
+      "size": 6150,
+      "mtime": 1780455616.3246212,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/references/presentation_prompts.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/references/model_tier_defaults.md": {
+      "size": 2970,
+      "mtime": 1780455616.3246212,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/references/model_tier_defaults.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/references/attempt_agent.md": {
+      "size": 1961,
+      "mtime": 1780455616.3246212,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/references/attempt_agent.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/references/known_constructions.md": {
+      "size": 2024,
+      "mtime": 1780455616.3246212,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/references/known_constructions.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/hooks.json": {
+      "size": 4393,
+      "mtime": 1780455616.4006178,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/hooks.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/gitutil.py": {
+      "size": 34900,
+      "mtime": 1780455616.4006178,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/gitutil.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/_base.py": {
+      "size": 10176,
+      "mtime": 1780455616.396618,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/_base.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/security_reminder_hook.py": {
+      "size": 111593,
+      "mtime": 1780455616.4006178,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/security_reminder_hook.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/session_state.py": {
+      "size": 5649,
+      "mtime": 1780455616.4006178,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/session_state.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/extensibility.py": {
+      "size": 12240,
+      "mtime": 1780455616.396618,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/extensibility.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/llm.py": {
+      "size": 115238,
+      "mtime": 1780455616.4006178,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/llm.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/diffstate.py": {
+      "size": 20986,
+      "mtime": 1780455616.396618,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/diffstate.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/patterns.py": {
+      "size": 18474,
+      "mtime": 1780455616.4006178,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/patterns.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/review_api.py": {
+      "size": 24763,
+      "mtime": 1780455616.4006178,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/review_api.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/sg-python.sh": {
+      "size": 5471,
+      "mtime": 1780455616.4006178,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/sg-python.sh"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/ensure_agent_sdk.py": {
+      "size": 23212,
+      "mtime": 1780455616.396618,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/ensure_agent_sdk.py"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/.claude-plugin/plugin.json": {
+      "size": 499,
+      "mtime": 1780455616.396618,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/explanatory-output-style/hooks/hooks.json": {
+      "size": 323,
+      "mtime": 1780455616.2926228,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/explanatory-output-style/hooks/hooks.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/explanatory-output-style/hooks-handlers/session-start.sh": {
+      "size": 1468,
+      "mtime": 1780455616.2926228,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/explanatory-output-style/hooks-handlers/session-start.sh"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/explanatory-output-style/.claude-plugin/plugin.json": {
+      "size": 290,
+      "mtime": 1780455616.2926228,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/explanatory-output-style/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/mcp-tunnels/.claude-plugin/plugin.json": {
+      "size": 323,
+      "mtime": 1780455616.3406205,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/mcp-tunnels/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/mcp-tunnels/commands/create-docker-mcp-tunnel.md": {
+      "size": 16293,
+      "mtime": 1780455616.3406205,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/mcp-tunnels/commands/create-docker-mcp-tunnel.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/claude-md-management/.claude-plugin/plugin.json": {
+      "size": 283,
+      "mtime": 1780455616.2566245,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/claude-md-management/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/claude-md-management/commands/revise-claude-md.md": {
+      "size": 1357,
+      "mtime": 1780455616.2606242,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/claude-md-management/commands/revise-claude-md.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/claude-md-management/skills/claude-md-improver/SKILL.md": {
+      "size": 6028,
+      "mtime": 1780455616.2606242,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/claude-md-management/skills/claude-md-improver/SKILL.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/claude-md-management/skills/claude-md-improver/references/quality-criteria.md": {
+      "size": 2617,
+      "mtime": 1780455616.2606242,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/claude-md-management/skills/claude-md-improver/references/quality-criteria.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/claude-md-management/skills/claude-md-improver/references/templates.md": {
+      "size": 3687,
+      "mtime": 1780455616.2606242,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/claude-md-management/skills/claude-md-improver/references/templates.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/claude-md-management/skills/claude-md-improver/references/update-guidelines.md": {
+      "size": 3197,
+      "mtime": 1780455616.264624,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/claude-md-management/skills/claude-md-improver/references/update-guidelines.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/feature-dev/agents/code-architect.md": {
+      "size": 2259,
+      "mtime": 1780455616.2966225,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/feature-dev/agents/code-architect.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/feature-dev/agents/code-explorer.md": {
+      "size": 2115,
+      "mtime": 1780455616.2966225,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/feature-dev/agents/code-explorer.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/feature-dev/agents/code-reviewer.md": {
+      "size": 2994,
+      "mtime": 1780455616.2966225,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/feature-dev/agents/code-reviewer.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/feature-dev/.claude-plugin/plugin.json": {
+      "size": 262,
+      "mtime": 1780455616.2926228,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/feature-dev/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/feature-dev/commands/feature-dev.md": {
+      "size": 5097,
+      "mtime": 1780455616.2966225,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/feature-dev/commands/feature-dev.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/.claude-plugin/plugin.json": {
+      "size": 334,
+      "mtime": 1780455616.3286211,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-server/SKILL.md": {
+      "size": 12084,
+      "mtime": 1780455616.3326209,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-server/SKILL.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-app/SKILL.md": {
+      "size": 19391,
+      "mtime": 1780455616.3326209,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-app/SKILL.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcpb/SKILL.md": {
+      "size": 7867,
+      "mtime": 1780455616.3366208,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcpb/SKILL.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcpb/references/manifest-schema.md": {
+      "size": 5359,
+      "mtime": 1780455616.3366208,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcpb/references/manifest-schema.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcpb/references/local-security.md": {
+      "size": 5384,
+      "mtime": 1780455616.3366208,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcpb/references/local-security.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-app/references/directory-checklist.md": {
+      "size": 1552,
+      "mtime": 1780455616.3326209,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-app/references/directory-checklist.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-app/references/widget-templates.md": {
+      "size": 8924,
+      "mtime": 1780455616.3326209,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-app/references/widget-templates.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-app/references/payload-budgeting.md": {
+      "size": 2175,
+      "mtime": 1780455616.3326209,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-app/references/payload-budgeting.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-app/references/abuse-protection.md": {
+      "size": 2412,
+      "mtime": 1780455616.3326209,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-app/references/abuse-protection.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-app/references/apps-sdk-messages.md": {
+      "size": 8772,
+      "mtime": 1780455616.3326209,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-app/references/apps-sdk-messages.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-app/references/iframe-sandbox.md": {
+      "size": 5188,
+      "mtime": 1780455616.3326209,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-app/references/iframe-sandbox.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-server/references/elicitation.md": {
+      "size": 4728,
+      "mtime": 1780455616.3366208,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-server/references/elicitation.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-server/references/deploy-cloudflare-workers.md": {
+      "size": 3639,
+      "mtime": 1780455616.3366208,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-server/references/deploy-cloudflare-workers.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-server/references/resources-and-prompts.md": {
+      "size": 4090,
+      "mtime": 1780455616.3366208,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-server/references/resources-and-prompts.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-server/references/remote-http-scaffold.md": {
+      "size": 7054,
+      "mtime": 1780455616.3366208,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-server/references/remote-http-scaffold.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-server/references/auth.md": {
+      "size": 5745,
+      "mtime": 1780455616.3326209,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-server/references/auth.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-server/references/tool-design.md": {
+      "size": 7054,
+      "mtime": 1780455616.3366208,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-server/references/tool-design.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-server/references/server-capabilities.md": {
+      "size": 4673,
+      "mtime": 1780455616.3366208,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-server/references/server-capabilities.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-server/references/versions.md": {
+      "size": 1108,
+      "mtime": 1780455616.3366208,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-server/references/versions.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/agents/agent-creator.md": {
+      "size": 7488,
+      "mtime": 1780455616.3526201,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/agents/agent-creator.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/agents/skill-reviewer.md": {
+      "size": 6132,
+      "mtime": 1780455616.3526201,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/agents/skill-reviewer.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/agents/plugin-validator.md": {
+      "size": 6678,
+      "mtime": 1780455616.3526201,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/agents/plugin-validator.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/.claude-plugin/plugin.json": {
+      "size": 267,
+      "mtime": 1780455616.3486202,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/commands/create-plugin.md": {
+      "size": 15855,
+      "mtime": 1780455616.3526201,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/commands/create-plugin.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-structure/README.md": {
+      "size": 3210,
+      "mtime": 1780455616.3766189,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-structure/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-structure/SKILL.md": {
+      "size": 13796,
+      "mtime": 1780455616.3766189,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-structure/SKILL.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/mcp-integration/SKILL.md": {
+      "size": 12519,
+      "mtime": 1780455616.3646195,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/mcp-integration/SKILL.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/skill-development/SKILL.md": {
+      "size": 22825,
+      "mtime": 1780455616.3806188,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/skill-development/SKILL.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-settings/SKILL.md": {
+      "size": 12097,
+      "mtime": 1780455616.3726192,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-settings/SKILL.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/agent-development/SKILL.md": {
+      "size": 11168,
+      "mtime": 1780455616.3526201,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/agent-development/SKILL.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/README.md": {
+      "size": 7651,
+      "mtime": 1780455616.3566198,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/SKILL.md": {
+      "size": 19233,
+      "mtime": 1780455616.3566198,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/SKILL.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/SKILL.md": {
+      "size": 16246,
+      "mtime": 1780455616.3606195,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/SKILL.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/scripts/test-hook.sh": {
+      "size": 5336,
+      "mtime": 1780455616.3646195,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/scripts/test-hook.sh"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/scripts/validate-hook-schema.sh": {
+      "size": 5081,
+      "mtime": 1780455616.3646195,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/scripts/validate-hook-schema.sh"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/scripts/hook-linter.sh": {
+      "size": 4200,
+      "mtime": 1780455616.3646195,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/scripts/hook-linter.sh"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/scripts/README.md": {
+      "size": 3677,
+      "mtime": 1780455616.3646195,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/scripts/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/references/patterns.md": {
+      "size": 7144,
+      "mtime": 1780455616.3646195,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/references/patterns.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/references/advanced.md": {
+      "size": 10148,
+      "mtime": 1780455616.3646195,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/references/advanced.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/references/migration.md": {
+      "size": 8299,
+      "mtime": 1780455616.3646195,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/references/migration.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/examples/validate-bash.sh": {
+      "size": 1304,
+      "mtime": 1780455616.3606195,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/examples/validate-bash.sh"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/examples/validate-write.sh": {
+      "size": 1222,
+      "mtime": 1780455616.3606195,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/examples/validate-write.sh"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/examples/load-context.sh": {
+      "size": 1690,
+      "mtime": 1780455616.3606195,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/examples/load-context.sh"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/references/plugin-features-reference.md": {
+      "size": 14622,
+      "mtime": 1780455616.3606195,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/references/plugin-features-reference.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/references/testing-strategies.md": {
+      "size": 14803,
+      "mtime": 1780455616.3606195,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/references/testing-strategies.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/references/marketplace-considerations.md": {
+      "size": 16437,
+      "mtime": 1780455616.3606195,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/references/marketplace-considerations.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/references/documentation-patterns.md": {
+      "size": 14971,
+      "mtime": 1780455616.3606195,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/references/documentation-patterns.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/references/interactive-commands.md": {
+      "size": 20980,
+      "mtime": 1780455616.3606195,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/references/interactive-commands.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/references/frontmatter-reference.md": {
+      "size": 9162,
+      "mtime": 1780455616.3606195,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/references/frontmatter-reference.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/references/advanced-workflows.md": {
+      "size": 13618,
+      "mtime": 1780455616.3606195,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/references/advanced-workflows.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/examples/simple-commands.md": {
+      "size": 8675,
+      "mtime": 1780455616.3566198,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/examples/simple-commands.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/examples/plugin-commands.md": {
+      "size": 13989,
+      "mtime": 1780455616.3566198,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/examples/plugin-commands.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/agent-development/scripts/validate-agent.sh": {
+      "size": 5796,
+      "mtime": 1780455616.3566198,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/agent-development/scripts/validate-agent.sh"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/agent-development/references/triggering-examples.md": {
+      "size": 8868,
+      "mtime": 1780455616.3566198,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/agent-development/references/triggering-examples.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/agent-development/references/system-prompt-design.md": {
+      "size": 9998,
+      "mtime": 1780455616.3566198,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/agent-development/references/system-prompt-design.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/agent-development/references/agent-creation-system-prompt.md": {
+      "size": 9749,
+      "mtime": 1780455616.3566198,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/agent-development/references/agent-creation-system-prompt.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/agent-development/examples/agent-creation-prompt.md": {
+      "size": 9838,
+      "mtime": 1780455616.3526201,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/agent-development/examples/agent-creation-prompt.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/agent-development/examples/complete-agent-examples.md": {
+      "size": 13916,
+      "mtime": 1780455616.3526201,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/agent-development/examples/complete-agent-examples.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-settings/scripts/validate-settings.sh": {
+      "size": 2712,
+      "mtime": 1780455616.3766189,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-settings/scripts/validate-settings.sh"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-settings/scripts/parse-frontmatter.sh": {
+      "size": 1269,
+      "mtime": 1780455616.3766189,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-settings/scripts/parse-frontmatter.sh"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-settings/references/real-world-examples.md": {
+      "size": 9492,
+      "mtime": 1780455616.3726192,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-settings/references/real-world-examples.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-settings/references/parsing-techniques.md": {
+      "size": 11513,
+      "mtime": 1780455616.3726192,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-settings/references/parsing-techniques.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-settings/examples/create-settings-command.md": {
+      "size": 2177,
+      "mtime": 1780455616.3726192,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-settings/examples/create-settings-command.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-settings/examples/read-settings-hook.sh": {
+      "size": 2205,
+      "mtime": 1780455616.3726192,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-settings/examples/read-settings-hook.sh"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-settings/examples/example-settings.md": {
+      "size": 2930,
+      "mtime": 1780455616.3726192,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-settings/examples/example-settings.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/skill-development/references/skill-creator-original.md": {
+      "size": 11547,
+      "mtime": 1780455616.3806188,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/skill-development/references/skill-creator-original.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/mcp-integration/references/server-types.md": {
+      "size": 10613,
+      "mtime": 1780455616.3686192,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/mcp-integration/references/server-types.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/mcp-integration/references/authentication.md": {
+      "size": 10196,
+      "mtime": 1780455616.3686192,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/mcp-integration/references/authentication.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/mcp-integration/references/tool-usage.md": {
+      "size": 11674,
+      "mtime": 1780455616.3686192,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/mcp-integration/references/tool-usage.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/mcp-integration/examples/stdio-server.json": {
+      "size": 686,
+      "mtime": 1780455616.3686192,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/mcp-integration/examples/stdio-server.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/mcp-integration/examples/sse-server.json": {
+      "size": 413,
+      "mtime": 1780455616.3686192,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/mcp-integration/examples/sse-server.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/mcp-integration/examples/http-server.json": {
+      "size": 502,
+      "mtime": 1780455616.3686192,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/mcp-integration/examples/http-server.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-structure/references/component-patterns.md": {
+      "size": 12086,
+      "mtime": 1780455616.3766189,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-structure/references/component-patterns.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-structure/references/manifest-reference.md": {
+      "size": 12061,
+      "mtime": 1780455616.3766189,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-structure/references/manifest-reference.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-structure/examples/minimal-plugin.md": {
+      "size": 1731,
+      "mtime": 1780455616.3766189,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-structure/examples/minimal-plugin.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-structure/examples/standard-plugin.md": {
+      "size": 13310,
+      "mtime": 1780455616.3766189,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-structure/examples/standard-plugin.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-structure/examples/advanced-plugin.md": {
+      "size": 18746,
+      "mtime": 1780455616.3766189,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-structure/examples/advanced-plugin.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/example-plugin/.claude-plugin/plugin.json": {
+      "size": 270,
+      "mtime": 1780455616.2886229,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/example-plugin/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/example-plugin/commands/example-command.md": {
+      "size": 1247,
+      "mtime": 1780455616.2886229,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/example-plugin/commands/example-command.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/example-plugin/skills/example-command/SKILL.md": {
+      "size": 1226,
+      "mtime": 1780455616.2886229,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/example-plugin/skills/example-command/SKILL.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/example-plugin/skills/example-skill/SKILL.md": {
+      "size": 2725,
+      "mtime": 1780455616.2886229,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/example-plugin/skills/example-skill/SKILL.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/learning-output-style/hooks/hooks.json": {
+      "size": 320,
+      "mtime": 1780455616.3206215,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/learning-output-style/hooks/hooks.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/learning-output-style/hooks-handlers/session-start.sh": {
+      "size": 3564,
+      "mtime": 1780455616.3206215,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/learning-output-style/hooks-handlers/session-start.sh"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/learning-output-style/.claude-plugin/plugin.json": {
+      "size": 295,
+      "mtime": 1780455616.3166218,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/learning-output-style/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/ralph-loop/hooks/hooks.json": {
+      "size": 291,
+      "mtime": 1780455616.3926182,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/ralph-loop/hooks/hooks.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/ralph-loop/hooks/stop-hook.sh": {
+      "size": 7533,
+      "mtime": 1780455616.3926182,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/ralph-loop/hooks/stop-hook.sh"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/ralph-loop/scripts/setup-ralph-loop.sh": {
+      "size": 7044,
+      "mtime": 1780455616.3926182,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/ralph-loop/scripts/setup-ralph-loop.sh"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/ralph-loop/.claude-plugin/plugin.json": {
+      "size": 343,
+      "mtime": 1780455616.3886182,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/ralph-loop/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/ralph-loop/commands/cancel-ralph.md": {
+      "size": 738,
+      "mtime": 1780455616.3886182,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/ralph-loop/commands/cancel-ralph.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/ralph-loop/commands/help.md": {
+      "size": 3227,
+      "mtime": 1780455616.3886182,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/ralph-loop/commands/help.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/plugins/ralph-loop/commands/ralph-loop.md": {
+      "size": 916,
+      "mtime": 1780455616.3886182,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/plugins/ralph-loop/commands/ralph-loop.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/.npmrc": {
+      "size": 37,
+      "mtime": 1780455616.2406251,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/.npmrc"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/server.ts": {
+      "size": 39746,
+      "mtime": 1780455616.2406251,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/server.ts"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/.mcp.json": {
+      "size": 166,
+      "mtime": 1780455616.2366254,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/.mcp.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/bun.lock": {
+      "size": 20129,
+      "mtime": 1780455616.2406251,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/bun.lock"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/ACCESS.md": {
+      "size": 7075,
+      "mtime": 1780455616.2406251,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/ACCESS.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/package.json": {
+      "size": 302,
+      "mtime": 1780455616.2406251,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/package.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/README.md": {
+      "size": 4494,
+      "mtime": 1780455616.2406251,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/LICENSE": {
+      "size": 11344,
+      "mtime": 1780455616.2406251,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/context7/.mcp.json": {
+      "size": 90,
+      "mtime": 1780455616.1966271,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/context7/.mcp.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/terraform/.mcp.json": {
+      "size": 192,
+      "mtime": 1780455616.244625,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/terraform/.mcp.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/asana/.mcp.json": {
+      "size": 79,
+      "mtime": 1780455616.1926274,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/asana/.mcp.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/fakechat/.npmrc": {
+      "size": 37,
+      "mtime": 1780455616.2046268,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/fakechat/.npmrc"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/fakechat/server.ts": {
+      "size": 10547,
+      "mtime": 1780455616.2046268,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/fakechat/server.ts"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/fakechat/.mcp.json": {
+      "size": 166,
+      "mtime": 1780455616.200627,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/fakechat/.mcp.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/fakechat/bun.lock": {
+      "size": 19317,
+      "mtime": 1780455616.2046268,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/fakechat/bun.lock"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/fakechat/package.json": {
+      "size": 333,
+      "mtime": 1780455616.2046268,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/fakechat/package.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/fakechat/README.md": {
+      "size": 1308,
+      "mtime": 1780455616.2046268,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/fakechat/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/fakechat/LICENSE": {
+      "size": 11344,
+      "mtime": 1780455616.2046268,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/fakechat/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/laravel-boost/.mcp.json": {
+      "size": 88,
+      "mtime": 1780455616.2286258,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/laravel-boost/.mcp.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/github/.mcp.json": {
+      "size": 178,
+      "mtime": 1780455616.2086267,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/github/.mcp.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/playwright/.mcp.json": {
+      "size": 87,
+      "mtime": 1780455616.2366254,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/playwright/.mcp.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/serena/.mcp.json": {
+      "size": 137,
+      "mtime": 1780455616.2366254,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/serena/.mcp.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/gitlab/.mcp.json": {
+      "size": 85,
+      "mtime": 1780455616.2086267,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/gitlab/.mcp.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/discord/.npmrc": {
+      "size": 37,
+      "mtime": 1780455616.1966271,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/discord/.npmrc"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/discord/server.ts": {
+      "size": 33549,
+      "mtime": 1780455616.1966271,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/discord/server.ts"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/discord/.mcp.json": {
+      "size": 165,
+      "mtime": 1780455616.1966271,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/discord/.mcp.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/discord/bun.lock": {
+      "size": 23966,
+      "mtime": 1780455616.1966271,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/discord/bun.lock"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/discord/ACCESS.md": {
+      "size": 6599,
+      "mtime": 1780455616.1966271,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/discord/ACCESS.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/discord/package.json": {
+      "size": 306,
+      "mtime": 1780455616.1966271,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/discord/package.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/discord/README.md": {
+      "size": 4904,
+      "mtime": 1780455616.1966271,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/discord/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/discord/LICENSE": {
+      "size": 11344,
+      "mtime": 1780455616.1966271,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/discord/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/linear/.mcp.json": {
+      "size": 82,
+      "mtime": 1780455616.2326255,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/linear/.mcp.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/.npmrc": {
+      "size": 37,
+      "mtime": 1780455616.2126265,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/.npmrc"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/server.ts": {
+      "size": 32245,
+      "mtime": 1780455616.2126265,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/server.ts"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/.mcp.json": {
+      "size": 166,
+      "mtime": 1780455616.2126265,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/.mcp.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/bun.lock": {
+      "size": 19345,
+      "mtime": 1780455616.2126265,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/bun.lock"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/ACCESS.md": {
+      "size": 6764,
+      "mtime": 1780455616.2126265,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/ACCESS.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/package.json": {
+      "size": 355,
+      "mtime": 1780455616.2126265,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/package.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/README.md": {
+      "size": 4442,
+      "mtime": 1780455616.2126265,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/LICENSE": {
+      "size": 11344,
+      "mtime": 1780455616.2126265,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/LICENSE"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/firebase/.mcp.json": {
+      "size": 97,
+      "mtime": 1780455616.2046268,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/firebase/.mcp.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/greptile/.mcp.json": {
+      "size": 162,
+      "mtime": 1780455616.2086267,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/greptile/.mcp.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/greptile/README.md": {
+      "size": 1914,
+      "mtime": 1780455616.2086267,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/greptile/README.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/greptile/.claude-plugin/plugin.json": {
+      "size": 357,
+      "mtime": 1780455616.2086267,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/greptile/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/firebase/.claude-plugin/plugin.json": {
+      "size": 281,
+      "mtime": 1780455616.2046268,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/firebase/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/.claude-plugin/plugin.json": {
+      "size": 319,
+      "mtime": 1780455616.2126265,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/skills/configure/SKILL.md": {
+      "size": 3546,
+      "mtime": 1780455616.2166264,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/skills/configure/SKILL.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/skills/access/SKILL.md": {
+      "size": 4754,
+      "mtime": 1780455616.2166264,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/skills/access/SKILL.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/linear/.claude-plugin/plugin.json": {
+      "size": 279,
+      "mtime": 1780455616.2326255,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/linear/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/discord/.claude-plugin/plugin.json": {
+      "size": 290,
+      "mtime": 1780455616.1966271,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/discord/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/discord/skills/configure/SKILL.md": {
+      "size": 4324,
+      "mtime": 1780455616.200627,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/discord/skills/configure/SKILL.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/discord/skills/access/SKILL.md": {
+      "size": 4357,
+      "mtime": 1780455616.200627,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/discord/skills/access/SKILL.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/gitlab/.claude-plugin/plugin.json": {
+      "size": 254,
+      "mtime": 1780455616.2086267,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/gitlab/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/serena/.claude-plugin/plugin.json": {
+      "size": 254,
+      "mtime": 1780455616.2366254,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/serena/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/playwright/.claude-plugin/plugin.json": {
+      "size": 295,
+      "mtime": 1780455616.2366254,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/playwright/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/github/.claude-plugin/plugin.json": {
+      "size": 271,
+      "mtime": 1780455616.2086267,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/github/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/laravel-boost/.claude-plugin/plugin.json": {
+      "size": 295,
+      "mtime": 1780455616.2286258,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/laravel-boost/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/fakechat/.claude-plugin/plugin.json": {
+      "size": 300,
+      "mtime": 1780455616.200627,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/fakechat/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/asana/.claude-plugin/plugin.json": {
+      "size": 276,
+      "mtime": 1780455616.1926274,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/asana/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/terraform/.claude-plugin/plugin.json": {
+      "size": 274,
+      "mtime": 1780455616.244625,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/terraform/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/context7/.claude-plugin/plugin.json": {
+      "size": 262,
+      "mtime": 1780455616.1966271,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/context7/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/.claude-plugin/plugin.json": {
+      "size": 294,
+      "mtime": 1780455616.2366254,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/.claude-plugin/plugin.json"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/skills/configure/SKILL.md": {
+      "size": 4024,
+      "mtime": 1780455616.2406251,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/skills/configure/SKILL.md"
+    },
+    "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/skills/access/SKILL.md": {
+      "size": 4280,
+      "mtime": 1780455616.2406251,
+      "relative_path": "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/skills/access/SKILL.md"
+    },
+    "projects/-home-awal-workspace-claude-sync/f357122b-f8ba-4f38-88ea-c7957f80b9a5.jsonl": {
+      "size": 24234,
+      "mtime": 1780559861.861902,
+      "relative_path": "projects/-home-awal-workspace-claude-sync/f357122b-f8ba-4f38-88ea-c7957f80b9a5.jsonl"
+    },
+    "projects/-home-awal-workspace-claude-sync/ba8bc262-ee91-4d13-b268-49b71c618e4d.jsonl": {
+      "size": 43855,
+      "mtime": 1780559452.528524,
+      "relative_path": "projects/-home-awal-workspace-claude-sync/ba8bc262-ee91-4d13-b268-49b71c618e4d.jsonl"
+    },
+    "projects/-home-awal-workspace-claude-sync/b1a65801-9581-4070-b3d2-e494eb5b3997.jsonl": {
+      "size": 2761228,
+      "mtime": 1780560393.5174565,
+      "relative_path": "projects/-home-awal-workspace-claude-sync/b1a65801-9581-4070-b3d2-e494eb5b3997.jsonl"
+    },
+    "projects/-home-awal-workspace-claude-sync/memory/claude-sync-tahap-progress.md": {
+      "size": 1510,
+      "mtime": 1780459878.5506232,
+      "relative_path": "projects/-home-awal-workspace-claude-sync/memory/claude-sync-tahap-progress.md"
+    },
+    "projects/-home-awal-workspace-claude-sync/memory/claude-sync-typer-cwd-gotcha.md": {
+      "size": 1355,
+      "mtime": 1780459862.730646,
+      "relative_path": "projects/-home-awal-workspace-claude-sync/memory/claude-sync-typer-cwd-gotcha.md"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/3270c2bdf1328e72@v2": {
+      "size": 1868,
+      "mtime": 1780457360.211688,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/3270c2bdf1328e72@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/f1efc13478f044d0@v2": {
+      "size": 688,
+      "mtime": 1780457360.211688,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/f1efc13478f044d0@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/60f15e753f22d3a8@v2": {
+      "size": 3777,
+      "mtime": 1780458522.2511914,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/60f15e753f22d3a8@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/f25669780b283f0a@v3": {
+      "size": 4118,
+      "mtime": 1780468783.7315927,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/f25669780b283f0a@v3"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/9e6ebfac40206a51@v2": {
+      "size": 6969,
+      "mtime": 1780558427.3257685,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/9e6ebfac40206a51@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/2604f7a59387fdc0@v2": {
+      "size": 331,
+      "mtime": 1780457360.211688,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/2604f7a59387fdc0@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/1bb0ec3adf0d00fa@v2": {
+      "size": 1510,
+      "mtime": 1780459982.4705694,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/1bb0ec3adf0d00fa@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/9f6fa869d8bbc7e9@v2": {
+      "size": 1515,
+      "mtime": 1780457360.211688,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/9f6fa869d8bbc7e9@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/ee8d17e4763cba40@v2": {
+      "size": 3839,
+      "mtime": 1780458522.2511914,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/ee8d17e4763cba40@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/6b676bccc2ca1e4f@v2": {
+      "size": 6439,
+      "mtime": 1780560103.14244,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/6b676bccc2ca1e4f@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/cc1983ae47adb79d@v3": {
+      "size": 2965,
+      "mtime": 1780457827.0275064,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/cc1983ae47adb79d@v3"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/da3d850074ba42ed@v2": {
+      "size": 2625,
+      "mtime": 1780468783.7315927,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/da3d850074ba42ed@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/83c6668371208e0f@v2": {
+      "size": 1633,
+      "mtime": 1780457360.211688,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/83c6668371208e0f@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/64ad648a694a0fce@v2": {
+      "size": 2004,
+      "mtime": 1780457360.2236881,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/64ad648a694a0fce@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/8f7f8e43548ee3d2@v3": {
+      "size": 5026,
+      "mtime": 1780468783.7315927,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/8f7f8e43548ee3d2@v3"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/9f6fa869d8bbc7e9@v3": {
+      "size": 3567,
+      "mtime": 1780457827.0755062,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/9f6fa869d8bbc7e9@v3"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/03ad01deac211740@v2": {
+      "size": 4299,
+      "mtime": 1780457827.0275064,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/03ad01deac211740@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/cc1983ae47adb79d@v2": {
+      "size": 2482,
+      "mtime": 1780457360.211688,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/cc1983ae47adb79d@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/64ad648a694a0fce@v3": {
+      "size": 3592,
+      "mtime": 1780457827.0275064,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/64ad648a694a0fce@v3"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/6528e14f684676b5@v2": {
+      "size": 8125,
+      "mtime": 1780459982.4705694,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/6528e14f684676b5@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/60f15e753f22d3a8@v3": {
+      "size": 4098,
+      "mtime": 1780459982.490569,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/60f15e753f22d3a8@v3"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/858f4eb0799c2fea@v2": {
+      "size": 94,
+      "mtime": 1780457360.2236881,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/858f4eb0799c2fea@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/75c1e92a3b02f162@v3": {
+      "size": 7917,
+      "mtime": 1780468783.7355783,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/75c1e92a3b02f162@v3"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/83c6668371208e0f@v7": {
+      "size": 2221,
+      "mtime": 1780559088.2189722,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/83c6668371208e0f@v7"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/cc1983ae47adb79d@v6": {
+      "size": 6234,
+      "mtime": 1780459982.4705694,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/cc1983ae47adb79d@v6"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/7075fb00fd83123f@v2": {
+      "size": 4012,
+      "mtime": 1780458522.2511914,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/7075fb00fd83123f@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/83c6668371208e0f@v9": {
+      "size": 2221,
+      "mtime": 1780560236.5678258,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/83c6668371208e0f@v9"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/23066f5eda5c5889@v2": {
+      "size": 3633,
+      "mtime": 1780468783.7315927,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/23066f5eda5c5889@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/83c6668371208e0f@v3": {
+      "size": 1738,
+      "mtime": 1780458522.2831914,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/83c6668371208e0f@v3"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/83c6668371208e0f@v4": {
+      "size": 1838,
+      "mtime": 1780458830.3710427,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/83c6668371208e0f@v4"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/cc1983ae47adb79d@v8": {
+      "size": 11001,
+      "mtime": 1780557959.4785442,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/cc1983ae47adb79d@v8"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/28089488d99b793e@v2": {
+      "size": 4982,
+      "mtime": 1780560103.14244,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/28089488d99b793e@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/2604f7a59387fdc0@v3": {
+      "size": 294,
+      "mtime": 1780557959.4785442,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/2604f7a59387fdc0@v3"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/9a2b0a1565c3a1b9@v2": {
+      "size": 9653,
+      "mtime": 1780468783.7355783,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/9a2b0a1565c3a1b9@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/b94605e392e71b48@v2": {
+      "size": 1355,
+      "mtime": 1780459982.4705694,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/b94605e392e71b48@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/83e580d7e0348a69@v2": {
+      "size": 6551,
+      "mtime": 1780459982.4705694,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/83e580d7e0348a69@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/83c6668371208e0f@v8": {
+      "size": 2126,
+      "mtime": 1780559614.34668,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/83c6668371208e0f@v8"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/a433eb3f6b953fc5@v2": {
+      "size": 4140,
+      "mtime": 1780459982.4705694,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/a433eb3f6b953fc5@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/f25669780b283f0a@v2": {
+      "size": 3678,
+      "mtime": 1780458830.3470428,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/f25669780b283f0a@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/75c1e92a3b02f162@v2": {
+      "size": 7932,
+      "mtime": 1780458830.3470428,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/75c1e92a3b02f162@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/bdbbb92cfbca1ebc@v2": {
+      "size": 5593,
+      "mtime": 1780457827.0275064,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/bdbbb92cfbca1ebc@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/a433eb3f6b953fc5@v3": {
+      "size": 4775,
+      "mtime": 1780468783.7315927,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/a433eb3f6b953fc5@v3"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/a86c2740ddb418f6@v2": {
+      "size": 2793,
+      "mtime": 1780468783.7315927,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/a86c2740ddb418f6@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/cdba51aea0534dcc@v2": {
+      "size": 2015,
+      "mtime": 1780457360.211688,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/cdba51aea0534dcc@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/5614ffabc4231c46@v2": {
+      "size": 4831,
+      "mtime": 1780468783.7315927,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/5614ffabc4231c46@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/0bcc23628b322829@v2": {
+      "size": 4168,
+      "mtime": 1780458830.3470428,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/0bcc23628b322829@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/00bdfa4cae6b2fc4@v2": {
+      "size": 6385,
+      "mtime": 1780459982.4705694,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/00bdfa4cae6b2fc4@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/0be1087cd9aacb24@v2": {
+      "size": 1984,
+      "mtime": 1780457360.211688,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/0be1087cd9aacb24@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/e7ab4822515e67d2@v2": {
+      "size": 39,
+      "mtime": 1780457360.2236881,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/e7ab4822515e67d2@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/c1a45b2b9a894d0b@v2": {
+      "size": 2560,
+      "mtime": 1780457360.2236881,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/c1a45b2b9a894d0b@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/8dd215626da16cd3@v2": {
+      "size": 5307,
+      "mtime": 1780458830.3470428,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/8dd215626da16cd3@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/b1cf974a20203f88@v2": {
+      "size": 43,
+      "mtime": 1780457360.211688,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/b1cf974a20203f88@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/8f7f8e43548ee3d2@v2": {
+      "size": 5065,
+      "mtime": 1780458522.2511914,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/8f7f8e43548ee3d2@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/cc1983ae47adb79d@v7": {
+      "size": 9402,
+      "mtime": 1780469560.228382,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/cc1983ae47adb79d@v7"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/cc1983ae47adb79d@v5": {
+      "size": 4773,
+      "mtime": 1780458830.3470428,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/cc1983ae47adb79d@v5"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/51edf66c57713a60@v2": {
+      "size": 4711,
+      "mtime": 1780558427.3257685,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/51edf66c57713a60@v2"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/83c6668371208e0f@v6": {
+      "size": 2126,
+      "mtime": 1780468783.7315927,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/83c6668371208e0f@v6"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/cc1983ae47adb79d@v4": {
+      "size": 4739,
+      "mtime": 1780458522.2511914,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/cc1983ae47adb79d@v4"
+    },
+    "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/83c6668371208e0f@v5": {
+      "size": 1946,
+      "mtime": 1780459982.4945693,
+      "relative_path": "file-history/b1a65801-9581-4070-b3d2-e494eb5b3997/83c6668371208e0f@v5"
+    }
+  }
+}

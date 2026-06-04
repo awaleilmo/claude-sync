@@ -1,0 +1,40 @@
+{
+  "env": {
+    "ANTHROPIC_AUTH_TOKEN": "sk-adacode-e77a797fe7c9d51db4da0911ff034bb858a807158ff4df45",
+    "ANTHROPIC_BASE_URL": "https://api.adacode.ai",
+    "API_TIMEOUT_MS": "3000000",
+    "DISABLE_TELEMETRY": "1",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+    "CLAUDE_CODE_USE_VERTEX": "0",
+    "CLAUDE_CODE_USE_BEDROCK": "0",
+    "ANTHROPIC_VERTEX_PROJECT_ID": ""
+  },
+  "includeCoAuthoredBy": false,
+  "permissions": {
+    "allow": [
+      "Bash(.venv/bin/python -m claude_sync.cli audit --json)",
+      "Bash(grep -E \"\\\\.py$\")",
+      "Bash(HOME=/tmp/fake-source /home/awal/workspace/claude-sync/.venv/bin/claude-sync export)",
+      "Bash(/home/awal/workspace/claude-sync/.venv/bin/claude-sync import *)",
+      "Bash(/home/awal/workspace/claude-sync/.venv/bin/claude-sync export *)",
+      "Bash(ls -la .claude-sync/data/)",
+      "Bash(ls ~/.claude/memory && echo \"---backup---\" && ls ~/.claude.backup-20260604-153023/memory 2>/dev/null || echo \"backup mem checked\")",
+      "Read(//home/awal/.claude.backup-20260604-153023/memory/**)",
+      "Bash(ls -la ~/.claude/*.jsonl ~/.claude/*.md ~/.claude/settings.json 2>/dev/null | head -5 && echo \"---\" && ls -la ~/.claude.backup-20260604-153023/*.jsonl ~/.claude.backup-20260604-153023/*.md ~/.claude.backup-20260604-153023/settings.json 2>/dev/null | head -5)",
+      "Read(//home/awal/.claude.backup-20260604-153023/**)",
+      "Bash(.venv/bin/pytest tests/test_exporter.py -v)",
+      "Bash(.venv/bin/pytest tests/test_importer.py::test_import_restores_all_subdirs_and_reports_count -v)",
+      "Bash(.venv/bin/pytest tests/test_importer.py -v --tb=line)",
+      "Bash(.venv/bin/pytest --tb=line)",
+      "Bash(rm -rf /tmp/test-full-sync)",
+      "Bash(mkdir -p /tmp/test-full-sync/project1 /tmp/test-full-sync/project2)",
+      "Read(//tmp/test-full-sync/**)",
+      "Bash(/home/awal/workspace/claude-sync/.venv/bin/claude-sync trace *)",
+      "Bash(/home/awal/workspace/claude-sync/.venv/bin/claude-sync push *)",
+      "Bash(.venv/bin/pytest -q --tb=short)"
+    ],
+    "deny": []
+  },
+  "model": "sonnet[1m]",
+  "theme": "dark"
+}

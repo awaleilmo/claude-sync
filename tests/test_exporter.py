@@ -31,8 +31,13 @@ def _make_claude_tree(root: Path, layout: dict[str, int]) -> Path:
 
 
 def test_export_subdirs_excludes_projects() -> None:
-    """`projects` is intentionally NOT in the export set (no filtering yet)."""
-    assert "projects" not in EXPORT_SUBDIRS
+    """Verify the canonical export subdirs.
+
+    The set includes the session-related folders that Claude Code
+    actually writes into, plus memory for persistence across devices.
+    """
+    assert "projects" in EXPORT_SUBDIRS  # Tahap 5: now included
+    assert "memory" in EXPORT_SUBDIRS   # Tahap 5: now included
     assert "sessions" in EXPORT_SUBDIRS
     assert "tasks" in EXPORT_SUBDIRS
     assert "plans" in EXPORT_SUBDIRS
@@ -67,7 +72,7 @@ def test_count_files_recursive(tmp_path: Path) -> None:
 def test_export_creates_data_root_and_copies_subdirs(tmp_path: Path) -> None:
     """A full export should mirror every present subdir and report counts."""
     claude = _make_claude_tree(
-        tmp_path, {"sessions": 3, "tasks": 2, "plans": 4, "session-env": 1}
+        tmp_path, {"sessions": 3, "tasks": 2, "plans": 4, "session-env": 1, "memory": 2, "projects": 5}
     )
 
     project = tmp_path / "project"
@@ -76,8 +81,8 @@ def test_export_creates_data_root_and_copies_subdirs(tmp_path: Path) -> None:
     report = ClaudeExporter(claude, project).export()
 
     # Counts.
-    assert report.copied == {"sessions": 3, "tasks": 2, "plans": 4, "session-env": 1}
-    assert report.file_count == 10
+    assert report.copied == {"sessions": 3, "tasks": 2, "plans": 4, "session-env": 1, "memory": 2, "projects": 5}
+    assert report.file_count == 17
     assert report.skipped == ()
 
     # Files on disk.
@@ -98,8 +103,8 @@ def test_export_skips_missing_source_subdirs(tmp_path: Path) -> None:
     report = ClaudeExporter(claude, project).export()
 
     assert report.copied == {"sessions": 2}
-    # The other three were skipped, in spec order.
-    assert set(report.skipped) == {"tasks", "plans", "session-env"}
+    # The other five were skipped.
+    assert set(report.skipped) == {"tasks", "plans", "session-env", "memory", "projects"}
     assert report.file_count == 2
 
     # The destination only has `sessions/`.
@@ -108,11 +113,13 @@ def test_export_skips_missing_source_subdirs(tmp_path: Path) -> None:
     assert not (data / "tasks").exists()
     assert not (data / "plans").exists()
     assert not (data / "session-env").exists()
+    assert not (data / "memory").exists()
+    assert not (data / "projects").exists()
 
 
 def test_export_wipes_previous_data(tmp_path: Path) -> None:
     """A second run must NOT keep stale files from the first."""
-    claude = _make_claude_tree(tmp_path, {"sessions": 2, "tasks": 1})
+    claude = _make_claude_tree(tmp_path, {"sessions": 2, "tasks": 1, "memory": 1})
 
     project = tmp_path / "project"
     project.mkdir()
@@ -127,11 +134,15 @@ def test_export_wipes_previous_data(tmp_path: Path) -> None:
     (claude / "tasks" / "file-0.txt").unlink()
     (claude / "plans").mkdir()  # a brand-new subdir appears
     (claude / "plans" / "p.txt").write_text("p", encoding="utf-8")
+    (claude / "projects").mkdir()  # another new subdir
+    (claude / "projects" / "proj.txt").write_text("proj", encoding="utf-8")
 
     report = ClaudeExporter(claude, project).export()
     assert report.copied["sessions"] == 3  # was 2, +extra
     assert report.copied["tasks"] == 0  # was 1, -file-0
+    assert report.copied["memory"] == 1  # unchanged
     assert report.copied["plans"] == 1  # new
+    assert report.copied["projects"] == 1  # new
     # `session-env` was missing in BOTH runs; first run skipped it,
     # and it's still skipped here (we don't switch a subdir from
     # skipped -> copied on a re-run).
@@ -217,6 +228,10 @@ def test_export_report_dataclass_shape() -> None:
         data_root=Path("/d"),
         copied={"sessions": 1, "tasks": 2},
         file_count=3,
+        copied_files=(),
+        skipped_files=(),
     )
     assert r.copied_subdirs == ("sessions", "tasks")
     assert r.file_count == 3
+    assert r.copied_files == ()
+    assert r.skipped_files == ()

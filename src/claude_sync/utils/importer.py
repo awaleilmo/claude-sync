@@ -25,11 +25,11 @@ from datetime import datetime
 from pathlib import Path
 from typing import Iterable
 
-# Reuse the same set of mirrored subdirs the exporter wrote. The
-# constants are kept in `exporter.py` so both sides agree by
+# Reuse the same set of mirrored subdirs and files the exporter wrote.
+# The constants are kept in `exporter.py` so both sides agree by
 # construction; importing from there avoids a duplicate source of
 # truth.
-from claude_sync.utils.exporter import DATA_SUBDIR, EXPORT_SUBDIRS
+from claude_sync.utils.exporter import DATA_SUBDIR, EXPORT_FILES, EXPORT_SUBDIRS
 
 # Filename suffix appended to the backup directory. The dash makes
 # the boundary between the original name and the timestamp obvious.
@@ -47,6 +47,8 @@ class ImportReport:
     skipped: tuple[str, ...] = ()
     file_count: int = 0
     backup_existed: bool = False
+    restored_files: tuple[str, ...] = ()
+    skipped_files: tuple[str, ...] = ()
 
     @property
     def restored_subdirs(self) -> tuple[str, ...]:
@@ -87,6 +89,8 @@ class ClaudeImporter:
            exist OR `backup` is False, skip the backup.
         3. Create a fresh `claude_path` and copy every subdir from
            `data_root` into it.
+        4. Copy individual files from `data_root` into the root of
+           `claude_path`.
 
         Args:
             backup: When False, skip the safety backup entirely. The
@@ -94,6 +98,8 @@ class ClaudeImporter:
         """
         restored: dict[str, int] = {}
         skipped: list[str] = []
+        restored_files: list[str] = []
+        skipped_files: list[str] = []
 
         # Bail early if there's nothing to import. The command layer
         # is expected to gate on this case, but we handle it here so
@@ -142,6 +148,18 @@ class ClaudeImporter:
             restored[name] = count
             file_count += count
 
+        # Step 3: copy individual files from data_root to claude_path root.
+        for filename in EXPORT_FILES:
+            source = self.data_root / filename
+            if not source.is_file():
+                skipped_files.append(filename)
+                continue
+
+            destination = self.claude_path / filename
+            shutil.copy2(source, destination)
+            restored_files.append(filename)
+            file_count += 1
+
         return ImportReport(
             claude_path=self.claude_path,
             data_root=self.data_root,
@@ -150,6 +168,8 @@ class ClaudeImporter:
             skipped=tuple(skipped),
             file_count=file_count,
             backup_existed=backup_existed,
+            restored_files=tuple(restored_files),
+            skipped_files=tuple(skipped_files),
         )
 
     def _make_backup_path(self) -> Path:

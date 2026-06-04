@@ -18,6 +18,7 @@ from claude_sync.commands import inspect as inspect_cmd
 from claude_sync.commands import pull as pull_cmd
 from claude_sync.commands import push as push_cmd
 from claude_sync.commands import status as status_cmd
+from claude_sync.commands import trace as trace_cmd
 
 # Single Typer app shared by all subcommands. `no_args_is_help=True`
 # makes `claude-sync` alone print the help screen, which is the
@@ -61,6 +62,7 @@ app.command(name="export")(export_cmd.export)
 app.command(name="import")(import_cmd.import_cmd)
 app.command(name="push")(push_cmd.push)
 app.command(name="pull")(pull_cmd.pull)
+app.command(name="trace")(trace_cmd.trace)
 
 
 if __name__ == "__main__":

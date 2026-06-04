@@ -188,9 +188,24 @@ class GitSync:
         """Initialize a new Git repository in `sync_dir`.
 
         No-op (still returns a result) if the directory is already a repo.
+        If a repo already exists, the configured branch name is updated to
+        match the actual current branch.
         """
         if self.is_repo():
-            # Re-run a tiny command just to give callers a consistent result.
+            # Detect the actual current branch so subsequent operations use
+            # the right name (important when the default branch is `master`).
+            try:
+                current = self._run(
+                    ["rev-parse", "--abbrev-ref", "HEAD"],
+                    cwd=self.sync_dir,
+                    check=True,
+                )
+                # Mutate the configured branch to match reality.
+                if current.stdout and current.stdout != "HEAD":
+                    object.__setattr__(self, "branch", current.stdout)
+            except GitError:
+                # Fallback: keep the configured branch name.
+                pass
             return self._run(
                 ["rev-parse", "--is-inside-work-tree"],
                 cwd=self.sync_dir,
