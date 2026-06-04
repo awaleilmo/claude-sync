@@ -20,7 +20,7 @@ Design notes:
 from __future__ import annotations
 
 import shutil
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
 from typing import Iterable
@@ -49,6 +49,9 @@ class ImportReport:
     backup_existed: bool = False
     restored_files: tuple[str, ...] = ()
     skipped_files: tuple[str, ...] = ()
+    # Added in Tahap 7C: project path remapping results.
+    remapped_projects: dict[str, str] = field(default_factory=dict)
+    unmatched_projects: tuple[str, ...] = ()
 
     @property
     def restored_subdirs(self) -> tuple[str, ...]:
@@ -91,6 +94,8 @@ class ClaudeImporter:
            `data_root` into it.
         4. Copy individual files from `data_root` into the root of
            `claude_path`.
+        5. Remap ``projects/`` folder names via ``ProjectMapper``
+           (Tahap 7C).
 
         Args:
             backup: When False, skip the safety backup entirely. The
@@ -160,6 +165,31 @@ class ClaudeImporter:
             restored_files.append(filename)
             file_count += 1
 
+        # Step 4: remap projects/ folder names (Tahap 7C).
+        remapped_projects: dict[str, str] = {}
+        unmatched_projects: list[str] = []
+        if "projects" in restored:
+            # Build the remap plan based on what's in data_root/projects/
+            # (which was just copied into claude_path/projects/).
+            from claude_sync.utils.project_mapper import ProjectMapper
+
+            mapper = ProjectMapper(
+                data_root=self.data_root,
+                claude_path=self.claude_path,
+            )
+            plan = mapper.build_remap_plan()
+            projects_dir = self.claude_path / "projects"
+
+            for source_encoded, target_encoded in plan.items():
+                src_folder = projects_dir / source_encoded
+                if target_encoded is not None and target_encoded != source_encoded:
+                    dst_folder = projects_dir / target_encoded
+                    if src_folder.exists():
+                        src_folder.rename(dst_folder)
+                        remapped_projects[source_encoded] = target_encoded
+                elif target_encoded is None:
+                    unmatched_projects.append(source_encoded)
+
         return ImportReport(
             claude_path=self.claude_path,
             data_root=self.data_root,
@@ -170,10 +200,12 @@ class ClaudeImporter:
             backup_existed=backup_existed,
             restored_files=tuple(restored_files),
             skipped_files=tuple(skipped_files),
+            remapped_projects=remapped_projects,
+            unmatched_projects=tuple(unmatched_projects),
         )
 
     def _make_backup_path(self) -> Path:
-        """Build a unique `claude_path.backup-YYYYMMDD-HHMMSS` path.
+        """Build a unique `claude_path.backup-YYYYMMDD-HHMMSS[-N]` path.
 
         If a backup with the default timestamp already exists, we
         fall back to appending `-<n>` until we find a free name. This
