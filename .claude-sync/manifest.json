@@ -1,4 +1,6 @@
 {
   "project_name": "claude-sync",
-  "version": 1
+  "version": 1,
+  "source_project_path": "/home/awal/workspace/claude-sync",
+  "source_claude_project_folder": "-home-awal-workspace-claude-sync"
 }

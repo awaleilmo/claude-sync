@@ -1,0 +1,4 @@
+**/__pycache__/
+**/*.pyc
+src/claude_sync.egg-info/
+tests/

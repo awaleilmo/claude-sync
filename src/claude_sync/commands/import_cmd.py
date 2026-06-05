@@ -121,13 +121,48 @@ def import_cmd(  # noqa: A001
         console.print("  Pass [cyan]--claude-path[/cyan] to specify a destination.")
         raise typer.Exit(code=1)
 
-    export_root = root / ".claude-sync" / "export" / "project"
-    if not export_root.is_dir():
-        console.print(
-            f"[yellow]![/yellow] No export data found: {export_root}"
+    # Phase 5 Part 2: Check for .claudepack ZIP first
+    from claude_sync.utils.exporter import CLAUDEPACK_FILENAME
+
+    claudepack_file = root / ".claude-sync" / CLAUDEPACK_FILENAME
+    use_claudepack = claudepack_file.is_file()
+
+    # Validate .claudepack if it exists
+    if use_claudepack:
+        importer = ProjectImporter(
+            claude_path=claude_path,
+            project_root=root,
+            local_project_path=local_project_path,
         )
-        console.print("  Run [cyan]claude-sync export[/cyan] first.")
-        raise typer.Exit(code=1)
+        try:
+            if not importer.has_claudepack():
+                console.print(
+                    f"[red]\u2717[/red] Corrupt .claudepack: {claudepack_file}"
+                )
+                console.print(
+                    "  The file may be damaged. Please re-export."
+                )
+                raise typer.Exit(code=1)
+        except ValueError as exc:
+            console.print(f"[red]\u2717[/red] {exc}")
+            raise typer.Exit(code=1)
+        console.print(
+            f"[cyan]![/cyan] Using .claudepack format: {CLAUDEPACK_FILENAME}"
+        )
+    else:
+        # Fallback: check folder export
+        export_root = root / ".claude-sync" / "export" / "project"
+        if not export_root.is_dir():
+            console.print(
+                f"[yellow]![/yellow] No export data found: {export_root}"
+            )
+            console.print("  Run [cyan]claude-sync export[/cyan] first.")
+            raise typer.Exit(code=1)
+        console.print(
+            "[cyan]![/cyan] Using legacy folder format"
+        )
+
+    # --- Phase 4: Validation warning (do not abort) ---
 
     # --- Phase 4: Validation warning (do not abort) ---
     # If the project_name in project.json doesn't match the current
@@ -163,6 +198,7 @@ def import_cmd(  # noqa: A001
             )
             console.print()
 
+    # Create importer (reused for format check above and for import)
     importer = ProjectImporter(
         claude_path=claude_path,
         project_root=root,
@@ -178,7 +214,9 @@ def import_cmd(  # noqa: A001
         console.print("  Run [cyan]claude-sync export[/cyan] first.")
         raise typer.Exit(code=1)
 
+    source_label = "ZIP (.claudepack)" if report.source_type == "claudepack" else "folder"
     console.print(
+        f"[bold]Source type:[/bold]          {source_label}\n"
         f"[bold]Importing from:[/bold]     {report.data_root}\n"
         f"[bold]Claude project folder:[/bold] {report.claude_project_folder}\n"
         f"[bold]Importing to:[/bold]       {report.target_project_path}\n"

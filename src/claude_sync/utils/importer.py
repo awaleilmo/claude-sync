@@ -22,6 +22,7 @@ Design notes:
 from __future__ import annotations
 
 import shutil
+import zipfile
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
@@ -31,7 +32,12 @@ from typing import Iterable
 # The constants are kept in `exporter.py` so both sides agree by
 # construction; importing from there avoids a duplicate source of
 # truth.
-from claude_sync.utils.exporter import DATA_SUBDIR, EXPORT_FILES, EXPORT_SUBDIRS
+from claude_sync.utils.exporter import (
+    CLAUDEPACK_FILENAME,
+    DATA_SUBDIR,
+    EXPORT_FILES,
+    EXPORT_SUBDIRS,
+)
 
 # Filename suffix appended to the backup directory. The dash makes
 # the boundary between the original name and the timestamp obvious.
@@ -49,6 +55,10 @@ class ImportReport:
     skipped: tuple[str, ...] = ()
     file_count: int = 0
     backup_existed: bool = False
+    source_type: str = ""
+    # Added in Tahap 7C: project path remapping results.
+    remapped_projects: dict[str, str] = field(default_factory=dict)
+    unmatched_projects: tuple[str, ...] = ()
     restored_files: tuple[str, ...] = ()
     skipped_files: tuple[str, ...] = ()
     # Added in Tahap 7C: project path remapping results.
@@ -254,6 +264,10 @@ class ProjectImportReport:
     backup_path: Path | None
     file_count: int = 0
     backup_existed: bool = False
+    source_type: str = ""
+    # Added in Tahap 7C: project path remapping results.
+    remapped_projects: dict[str, str] = field(default_factory=dict)
+    unmatched_projects: tuple[str, ...] = ()
 
 
 class ProjectImporter:
@@ -303,20 +317,106 @@ class ProjectImporter:
         # Return the first (and should be only) project folder
         return subdirs[0]
 
+    def _make_project_backup(self, target: Path) -> Path:
+        """Create a timestamped backup of the project folder.
+
+        Backup location: ``<claude_path>/backups/<folder>-YYYYMMDD-HHMMSS``
+        """
+        backup_dir = self.claude_path / BACKUP_SUBDIR
+        backup_dir.mkdir(parents=True, exist_ok=True)
+
+        stem = f"{target.name}-{datetime.now().strftime(BACKUP_SUFFIX_FORMAT)}"
+        candidate = backup_dir / stem
+        suffix_n = 0
+        while candidate.exists():
+            suffix_n += 1
+            candidate = backup_dir / f"{stem}-{suffix_n}"
+
+        shutil.copytree(target, candidate, dirs_exist_ok=False)
+        # Remove the original after successful backup copy
+        shutil.rmtree(target)
+        return candidate
+
+    # ------------------------------------------------------------------
+    # Phase 5 Part 2: .claudepack (ZIP) support
+    # ------------------------------------------------------------------
+
+    @property
+    def claudepack_path(self) -> Path:
+        """Path to the ``.claudepack`` ZIP file."""
+        return self.project_root / ".claude-sync" / CLAUDEPACK_FILENAME
+
+    def has_claudepack(self) -> bool:
+        """Return True if a valid ``.claudepack`` ZIP exists."""
+        path = self.claudepack_path
+        if not path.is_file():
+            return False
+        try:
+            with zipfile.ZipFile(path, "r") as zf:
+                zf.testzip()
+            return True
+        except zipfile.BadZipFile:
+            return False
+
+    def extract_claudepack(self) -> Path:
+        """Extract ``.claudepack`` into a sub-directory of ``.claude-sync/``.
+
+        Returns the path to the extracted contents.
+        Raises ``ValueError`` if the ZIP is corrupt.
+        """
+        path = self.claudepack_path
+        extracted_dir = self.project_root / ".claude-sync" / ".extracted"
+        if extracted_dir.exists():
+            shutil.rmtree(extracted_dir)
+        extracted_dir.mkdir(parents=True, exist_ok=True)
+
+        try:
+            with zipfile.ZipFile(path, "r") as zf:
+                zf.extractall(extracted_dir)
+        except zipfile.BadZipFile:
+            # Clean up on failure
+            shutil.rmtree(extracted_dir)
+            raise ValueError(
+                f"Corrupt .claudepack file: {path}\n"
+                "  The file may be incomplete or damaged. "
+                "Please re-export."
+            )
+
+        return extracted_dir
+
+    def _find_claudepack_source(self) -> tuple[Path | None, str]:
+        """Determine the import source.
+
+        Returns ``(source_path, source_type)`` where:
+        * ``source_path`` is the directory to import from
+        * ``source_type`` is ``"claudepack"`` or ``"folder"`` or ``None``
+
+        Priority: .claudepack > folder export.
+        """
+        if self.has_claudepack():
+            return self.extract_claudepack(), "claudepack"
+
+        source = self._find_export_source()
+        if source is not None:
+            return source, "folder"
+
+        return None, ""
+
     def import_data(self, backup: bool = True) -> ProjectImportReport:
         """Run the project-based import.
 
         Steps:
-        1. Validate that export data exists.
-        2. Determine current machine's Claude project folder name.
-        3. If target folder exists, back it up (only the project folder).
-        4. Restore exported data to target folder.
+        1. Determine import source (.claudepack ZIP or folder export).
+        2. If no source, return empty report.
+        3. Determine current machine's Claude project folder name.
+        4. If target folder exists, back it up (only the project folder).
+        5. Restore imported data to target folder.
 
         Args:
             backup: When False, skip the safety backup. Default True.
         """
-        # Step 1: Find export source
-        source = self._find_export_source()
+        # Step 1: Find import source (ZIP first, then folder)
+        source, source_type = self._find_claudepack_source()
         if source is None:
             return ProjectImportReport(
                 claude_path=self.claude_path,
@@ -354,24 +454,5 @@ class ProjectImporter:
             backup_path=backup_path,
             file_count=file_count,
             backup_existed=backup_existed,
+            source_type=source_type,
         )
-
-    def _make_project_backup(self, target: Path) -> Path:
-        """Create a timestamped backup of the project folder.
-
-        Backup location: ``<claude_path>/backups/<folder>-YYYYMMDD-HHMMSS``
-        """
-        backup_dir = self.claude_path / BACKUP_SUBDIR
-        backup_dir.mkdir(parents=True, exist_ok=True)
-
-        stem = f"{target.name}-{datetime.now().strftime(BACKUP_SUFFIX_FORMAT)}"
-        candidate = backup_dir / stem
-        suffix_n = 0
-        while candidate.exists():
-            suffix_n += 1
-            candidate = backup_dir / f"{stem}-{suffix_n}"
-
-        shutil.copytree(target, candidate, dirs_exist_ok=False)
-        # Remove the original after successful backup copy
-        shutil.rmtree(target)
-        return candidate

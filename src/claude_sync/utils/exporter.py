@@ -19,6 +19,8 @@ continue to import them unchanged.
 from __future__ import annotations
 
 import shutil
+import tempfile
+import zipfile
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Iterable
@@ -58,6 +60,7 @@ DATA_SUBDIR = "data"
 # Location of the project-based export payload.
 EXPORT_SUBDIR = "export"
 PROJECT_EXPORT_SUBDIR = "project"
+CLAUDEPACK_FILENAME = "project.claudepack"
 
 
 @dataclass
