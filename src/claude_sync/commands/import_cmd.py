@@ -209,3 +209,30 @@ def import_cmd(  # noqa: A001
         f"\n[bold green]\u2713[/bold green] Imported {report.file_count} files "
         f"into [bold]projects/{report.claude_project_folder}/[/bold]"
     )
+
+    # ---- Tahap 7C: Project Path Remapping table ----
+    if report.remapped_projects or report.unmatched_projects:
+        console.print("\n[bold]Project Path Remapping[/bold]")
+        remap_table = Table(show_header=True, header_style="bold cyan")
+        remap_table.add_column("Source (exported)", style="bold")
+        remap_table.add_column("Target (this machine)", justify="right")
+        remap_table.add_column("Status", justify="center")
+
+        # Show remapped projects first
+        for source_enc, target_enc in sorted(report.remapped_projects.items()):
+            if source_enc != target_enc:
+                remap_table.add_row(
+                    source_enc,
+                    target_enc,
+                    "[green]remapped[/green]",
+                )
+
+        # Show unmatched projects
+        for source_enc in sorted(report.unmatched_projects):
+            remap_table.add_row(
+                source_enc,
+                "(not found)",
+                "[yellow]kept as-is[/yellow]",
+            )
+
+        console.print(remap_table)
