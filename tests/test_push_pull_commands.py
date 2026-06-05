@@ -58,7 +58,8 @@ def test_push_with_no_remote_mentions_remote(tmp_path: Path, monkeypatch) -> Non
     git.run("add", ".keep")
     git.run("commit", "-m", "initial")
 
-    result = runner.invoke(app, ["push"])
+    # Use --no-export to avoid needing a Claude tree in this test.
+    result = runner.invoke(app, ["push", "--no-export"])
     assert result.exit_code != 0
     # Should mention either "remote" or a concrete error from git.
     assert "remote" in result.output.lower() or "git" in result.output.lower()
@@ -78,6 +79,7 @@ def test_pull_with_no_remote_warns(tmp_path: Path, monkeypatch) -> None:
     git.run("add", ".keep")
     git.run("commit", "-m", "initial")
 
+    # pull doesn't call export, so no Claude tree needed.
     result = runner.invoke(app, ["pull"])
     assert result.exit_code != 0
     assert "remote" in result.output.lower() or "git" in result.output.lower()

@@ -1,4 +1,4 @@
-"""Tests for the `claude-sync import` command."""
+"""Tests for the `claude-sync import` command (Phase 3 + Phase 4)."""
 
 from __future__ import annotations
 
@@ -10,7 +10,8 @@ from typer.testing import CliRunner
 
 from claude_sync.cli import app
 from claude_sync.utils.claude_locator import ClaudeLocator
-from claude_sync.utils.exporter import DATA_SUBDIR
+from claude_sync.utils.config import get_manifest_path, write_manifest
+from claude_sync.utils.project_path import project_to_claude_folder
 
 
 def _stub_locator(monkeypatch, path: Path | None) -> None:
@@ -20,25 +21,36 @@ def _stub_locator(monkeypatch, path: Path | None) -> None:
     monkeypatch.setattr(ClaudeLocator, "find_claude_path", stub)
 
 
-def _make_data_tree(project_root: Path, layout: dict[str, int]) -> None:
-    data = project_root / ".claude-sync" / DATA_SUBDIR
-    data.mkdir(parents=True)
-    for name, count in layout.items():
-        subdir = data / name
-        subdir.mkdir()
-        for i in range(count):
-            (subdir / f"f-{i}.txt").write_text("x", encoding="utf-8")
+def _make_export_tree(
+    project_root: Path, folder_name: str, files: dict[str, str]
+) -> Path:
+    """Build a fake `.claude-sync/export/project/<folder>/` tree."""
+    export_dir = project_root / ".claude-sync" / "export" / "project" / folder_name
+    export_dir.mkdir(parents=True)
+    for name, content in files.items():
+        fpath = export_dir / name
+        fpath.parent.mkdir(parents=True, exist_ok=True)
+        fpath.write_text(content, encoding="utf-8")
+    return export_dir
 
 
-def _make_existing_claude(root: Path, layout: dict[str, int]) -> Path:
-    claude = root / ".claude"
-    claude.mkdir()
-    for name, count in layout.items():
-        sub = claude / name
-        sub.mkdir()
-        for i in range(count):
-            (sub / f"old-{i}.txt").write_text("old", encoding="utf-8")
-    return claude
+def _make_claude_projects_dir(
+    claude_path: Path, folder_name: str, files: dict[str, str]
+) -> Path:
+    """Build a fake existing Claude project directory."""
+    projects_dir = claude_path / "projects"
+    target = projects_dir / folder_name
+    target.mkdir(parents=True)
+    for name, content in files.items():
+        fpath = target / name
+        fpath.parent.mkdir(parents=True, exist_ok=True)
+        fpath.write_text(content, encoding="utf-8")
+    return target
+
+
+def _expected_folder(project_path: Path) -> str:
+    """Compute the expected Claude folder name for a project path."""
+    return project_to_claude_folder(project_path)
 
 
 def test_import_fails_when_project_not_initialized(
@@ -59,9 +71,16 @@ def test_import_fails_when_claude_not_found(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """`import` should exit non-zero if no destination can be resolved."""
-    monkeypatch.chdir(tmp_path)
+    project = tmp_path / "project"
+    project.mkdir()
+    monkeypatch.chdir(project)
+
     runner = CliRunner()
-    runner.invoke(app, ["init"])  # project exists, but no data
+    runner.invoke(app, ["init"])
+
+    # Create export data so we pass the export check
+    _make_export_tree(project, "-some-folder", {"file.txt": "data"})
+
     _stub_locator(monkeypatch, None)
 
     result = runner.invoke(app, ["import"])
@@ -69,27 +88,30 @@ def test_import_fails_when_claude_not_found(
     assert "not found" in result.output.lower()
 
 
-def test_import_fails_when_data_dir_missing(
+def test_import_fails_when_no_export_data(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """If there's no `.claude-sync/data/`, we have nothing to import."""
-    monkeypatch.chdir(tmp_path)
+    """If there's no export data, abort with a clear message."""
+    project = tmp_path / "project"
+    project.mkdir()
+    monkeypatch.chdir(project)
+
     runner = CliRunner()
     runner.invoke(app, ["init"])
 
-    # Use a destination that does not pre-exist (no backup needed).
-    dest = tmp_path / "claude-dest"
-    _stub_locator(monkeypatch, dest)
+    claude_dest = tmp_path / ".claude"
+    claude_dest.mkdir()
+    _stub_locator(monkeypatch, claude_dest)
 
     result = runner.invoke(app, ["import"])
     assert result.exit_code != 0
-    assert "nothing to import" in result.output.lower()
+    assert "no export" in result.output.lower()
 
 
-def test_import_restores_files_and_reports_count(
+def test_import_restores_project_data(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """End-to-end: init, plant data, import, verify destination + count."""
+    """End-to-end: init, create export data, import, verify target."""
     project = tmp_path / "project"
     project.mkdir()
     monkeypatch.chdir(project)
@@ -97,60 +119,87 @@ def test_import_restores_files_and_reports_count(
     runner = CliRunner()
     runner.invoke(app, ["init"])
 
-    _make_data_tree(project, {"sessions": 3, "tasks": 2, "plans": 1, "session-env": 4})
+    # Compute the expected folder name from the project path
+    folder = _expected_folder(project)
 
-    dest = tmp_path / "claude-dest"
-    _stub_locator(monkeypatch, dest)
+    # Create export data with any name (importer will find it and copy to computed target)
+    _make_export_tree(
+        project,
+        "-source-folder",
+        {"session-1.jsonl": "session-data", "memory/notes.md": "notes"},
+    )
 
-    result = runner.invoke(app, ["import"])
+    claude_dest = tmp_path / ".claude"
+    claude_dest.mkdir()
+    _stub_locator(monkeypatch, claude_dest)
+
+    result = runner.invoke(
+        app,
+        ["import", "--local-project-path", str(project)],
+    )
     assert result.exit_code == 0, result.output
 
-    # Files on disk.
-    for name, count in {"sessions": 3, "tasks": 2, "plans": 1, "session-env": 4}.items():
-        target = dest / name
-        assert target.is_dir()
-        assert sum(1 for p in target.rglob("*") if p.is_file()) == count
-
-    # Summary line: total file count is 10.
-    assert "10" in result.output
-    assert "Imported" in result.output
+    # Verify files are at the expected target location
+    target = claude_dest / "projects" / folder
+    assert target.is_dir()
+    assert (target / "session-1.jsonl").read_text() == "session-data"
+    assert (target / "memory" / "notes.md").read_text() == "notes"
 
 
-def test_import_creates_backup_when_destination_exists(
+def test_import_creates_backup_of_existing_project(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """`import` must take a timestamped backup before overwriting."""
+    """`import` must take a timestamped backup of the target project folder."""
     project = tmp_path / "project"
     project.mkdir()
     monkeypatch.chdir(project)
 
     runner = CliRunner()
     runner.invoke(app, ["init"])
-    _make_data_tree(project, {"sessions": 1})
 
-    # Existing destination with old data.
-    dest = _make_existing_claude(tmp_path, {"sessions": 2})
-    _stub_locator(monkeypatch, dest)
+    folder = _expected_folder(project)
 
-    result = runner.invoke(app, ["import"])
+    claude_dest = tmp_path / ".claude"
+    claude_dest.mkdir()
+
+    # Create existing Claude project with old data at the expected target location
+    _make_claude_projects_dir(
+        claude_dest,
+        folder,
+        {"old-session.jsonl": "old-data"},
+    )
+
+    # Create export data (source folder name differs from target)
+    _make_export_tree(
+        project,
+        "-source-folder",
+        {"new-session.jsonl": "new-data"},
+    )
+
+    _stub_locator(monkeypatch, claude_dest)
+
+    result = runner.invoke(
+        app,
+        ["import", "--local-project-path", str(project)],
+    )
     assert result.exit_code == 0, result.output
 
-    # Find the backup directory.
-    backups = [p for p in tmp_path.iterdir() if p.name.startswith(".claude.backup-")]
+    # Backup should exist
+    backups_dir = claude_dest / "backups"
+    assert backups_dir.is_dir()
+    backups = list(backups_dir.iterdir())
     assert len(backups) == 1
-    backup = backups[0]
-    assert re.match(r"^\.claude\.backup-\d{8}-\d{6}(-\d+)?$", backup.name)
+    assert backups[0].name.startswith(f"{folder}-")
+    assert (backups[0] / "old-session.jsonl").read_text() == "old-data"
 
-    # Backup has the old data; destination has the new data.
-    assert (backup / "sessions" / "old-0.txt").is_file()
-    assert (dest / "sessions" / "f-0.txt").is_file()
-    assert not (dest / "sessions" / "old-0.txt").exists()
+    # Target has new data
+    target = claude_dest / "projects" / folder
+    assert (target / "new-session.jsonl").read_text() == "new-data"
 
-    # Backup path is mentioned in the output.
     assert "Backup created" in result.output
 
 
-def test_import_no_backup_flag_skips_backup(
+def test_import_no_backup_flag(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """`--no-backup` should not create a backup directory."""
@@ -160,21 +209,70 @@ def test_import_no_backup_flag_skips_backup(
 
     runner = CliRunner()
     runner.invoke(app, ["init"])
-    _make_data_tree(project, {"sessions": 1})
 
-    dest = _make_existing_claude(tmp_path, {"sessions": 2})
-    _stub_locator(monkeypatch, dest)
+    folder = _expected_folder(project)
 
-    result = runner.invoke(app, ["import", "--no-backup"])
+    claude_dest = tmp_path / ".claude"
+    claude_dest.mkdir()
+
+    _make_claude_projects_dir(claude_dest, folder, {"old.txt": "old"})
+    _make_export_tree(project, "-source-folder", {"new.txt": "new"})
+
+    _stub_locator(monkeypatch, claude_dest)
+
+    result = runner.invoke(
+        app,
+        ["import", "--no-backup", "--local-project-path", str(project)],
+    )
     assert result.exit_code == 0, result.output
 
-    # No backup directories.
-    backups = [p for p in tmp_path.iterdir() if p.name.startswith(".claude.backup-")]
-    assert backups == []
+    # No backups
+    assert not (claude_dest / "backups").exists()
 
-    # Destination has the imported data, not the old data.
-    assert (dest / "sessions" / "f-0.txt").is_file()
-    assert not (dest / "sessions" / "old-0.txt").exists()
+    # Target has new data
+    target = claude_dest / "projects" / folder
+    assert (target / "new.txt").read_text() == "new"
+
+
+def test_import_does_not_touch_other_projects(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Import must not modify other Claude project folders."""
+    project = tmp_path / "project"
+    project.mkdir()
+    monkeypatch.chdir(project)
+
+    runner = CliRunner()
+    runner.invoke(app, ["init"])
+
+    folder = _expected_folder(project)
+
+    claude_dest = tmp_path / ".claude"
+    claude_dest.mkdir()
+
+    # Other projects that must remain untouched
+    _make_claude_projects_dir(
+        claude_dest, "-home-user-project-a", {"a.txt": "data-a"}
+    )
+    _make_claude_projects_dir(
+        claude_dest, "-home-user-project-b", {"b.txt": "data-b"}
+    )
+    # Target project
+    _make_claude_projects_dir(claude_dest, folder, {"old.txt": "old"})
+
+    _make_export_tree(project, "-source-folder", {"new.txt": "new"})
+
+    _stub_locator(monkeypatch, claude_dest)
+
+    result = runner.invoke(
+        app,
+        ["import", "--local-project-path", str(project)],
+    )
+    assert result.exit_code == 0, result.output
+
+    # Other projects untouched
+    assert (claude_dest / "projects" / "-home-user-project-a" / "a.txt").read_text() == "data-a"
+    assert (claude_dest / "projects" / "-home-user-project-b" / "b.txt").read_text() == "data-b"
 
 
 def test_import_with_explicit_claude_path(
@@ -187,14 +285,178 @@ def test_import_with_explicit_claude_path(
 
     runner = CliRunner()
     runner.invoke(app, ["init"])
-    _make_data_tree(project, {"sessions": 2})
+
+    folder = _expected_folder(project)
+
+    _make_export_tree(project, "-source-folder", {"file.txt": "data"})
 
     dest = tmp_path / "explicit-dest"
+    dest.mkdir()
     _stub_locator(monkeypatch, tmp_path / "wrong")  # ignored
 
     result = runner.invoke(
-        app, ["import", "--claude-path", str(dest), "--no-backup"]
+        app,
+        [
+            "import",
+            "--claude-path", str(dest),
+            "--local-project-path", str(project),
+        ],
     )
     assert result.exit_code == 0, result.output
-    assert (dest / "sessions" / "f-0.txt").is_file()
-    assert (dest / "sessions" / "f-1.txt").is_file()
+    assert (dest / "projects" / folder / "file.txt").exists()
+
+
+# ---------------------------------------------------------------------------
+# Phase 4: Validation warnings (warn but do not abort)
+# ---------------------------------------------------------------------------
+
+
+def test_import_warns_on_project_name_mismatch_but_continues(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """If project.json's project_name differs from the current folder,
+    import must warn but still complete successfully."""
+    project = tmp_path / "project"
+    project.mkdir()
+    monkeypatch.chdir(project)
+
+    runner = CliRunner()
+    runner.invoke(app, ["init"])
+
+    # Tamper with project.json so project_name != current folder
+    from claude_sync.utils.project_identity import get_project_metadata_path, write_project_metadata
+    from claude_sync.utils.project_identity import ProjectMetadata
+
+    meta_path = get_project_metadata_path(project)
+    write_project_metadata(
+        meta_path,
+        ProjectMetadata(
+            project_name="stale-name-from-another-machine",
+            project_id="abc",
+            version=2,
+        ),
+    )
+
+    folder = _expected_folder(project)
+    _make_export_tree(project, "-source-folder", {"file.txt": "data"})
+
+    claude_dest = tmp_path / ".claude"
+    claude_dest.mkdir()
+    _stub_locator(monkeypatch, claude_dest)
+
+    result = runner.invoke(
+        app,
+        ["import", "--local-project-path", str(project)],
+    )
+
+    # Must still succeed
+    assert result.exit_code == 0, result.output
+    # And warn
+    assert "Mapping Mismatch" in result.output
+    assert "stale-name-from-another-machine" in result.output
+    assert folder in result.output
+    # Files still restored at current folder
+    assert (claude_dest / "projects" / folder / "file.txt").exists()
+
+
+def test_import_warns_on_source_manifest_mismatch_but_continues(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """If the manifest's source folder differs from the current folder,
+    import must warn but still complete successfully."""
+    project = tmp_path / "project"
+    project.mkdir()
+    monkeypatch.chdir(project)
+
+    runner = CliRunner()
+    runner.invoke(app, ["init"])
+
+    # Write a manifest with a source folder that differs from the current
+    manifest_path = get_manifest_path(project)
+    write_manifest(
+        manifest_path,
+        {
+            "project_name": project.name,
+            "version": 2,
+            "source_project_path": "/home/other-machine/project",
+            "source_claude_project_folder": "-home-other-machine-project",
+        },
+    )
+
+    folder = _expected_folder(project)
+    _make_export_tree(project, "-source-folder", {"file.txt": "data"})
+
+    claude_dest = tmp_path / ".claude"
+    claude_dest.mkdir()
+    _stub_locator(monkeypatch, claude_dest)
+
+    result = runner.invoke(
+        app,
+        ["import", "--local-project-path", str(project)],
+    )
+
+    assert result.exit_code == 0, result.output
+    assert "Source folder" in result.output
+    assert "-home-other-machine-project" in result.output
+    assert folder in result.output
+    # Files still restored at current folder
+    assert (claude_dest / "projects" / folder / "file.txt").exists()
+
+
+def test_import_silent_when_mapping_matches(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """If project.json's project_name matches the current folder, no warning."""
+    project = tmp_path / "project"
+    project.mkdir()
+    monkeypatch.chdir(project)
+
+    runner = CliRunner()
+    runner.invoke(app, ["init"])
+
+    folder = _expected_folder(project)
+
+    # Manually rewrite project.json with the current folder name as project_name
+    from claude_sync.utils.project_identity import (
+        ProjectMetadata,
+        get_project_metadata_path,
+        write_project_metadata,
+    )
+
+    meta_path = get_project_metadata_path(project)
+    write_project_metadata(
+        meta_path,
+        ProjectMetadata(
+            project_name=folder,
+            project_id="abc",
+            version=2,
+        ),
+    )
+
+    # Manifest source matches current
+    manifest_path = get_manifest_path(project)
+    write_manifest(
+        manifest_path,
+        {
+            "project_name": folder,
+            "version": 2,
+            "source_project_path": str(project),
+            "source_claude_project_folder": folder,
+        },
+    )
+
+    _make_export_tree(project, folder, {"file.txt": "data"})
+
+    claude_dest = tmp_path / ".claude"
+    claude_dest.mkdir()
+    _stub_locator(monkeypatch, claude_dest)
+
+    result = runner.invoke(
+        app,
+        ["import", "--local-project-path", str(project)],
+    )
+
+    assert result.exit_code == 0, result.output
+    assert "Mapping Mismatch" not in result.output
+    assert "Source folder" not in result.output or folder in result.output
+    assert "differs" not in result.output

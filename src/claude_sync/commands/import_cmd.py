@@ -1,12 +1,21 @@
 """`claude-sync import` command.
 
-Restores the contents of `.claude-sync/data/` back into the user's
-Claude Code configuration directory. Before touching the destination,
-the command takes a timestamped safety backup of whatever currently
-lives in `~/.claude`, so a bad restore can always be reverted.
+Restores only the current project\'s Claude Code data from
+``.claude-sync/export/project/<folder>/`` into
+``~/.claude/projects/<current-project-folder>/``.
 
-Note: the module is named `import_cmd.py` (not `import.py`) to
-avoid clashing with the stdlib `import` keyword.
+Phase 3 (Project-Based Import):
+
+* No longer restores the entire ``~/.claude`` directory.
+* Only the current project folder is restored.
+* Backup is per-project (not the whole ``~/.claude``).
+* Other projects in ``~/.claude/projects/`` are never touched.
+
+Safety validations (abort before any restore if any fail):
+
+* ``project.json`` exists.
+* Export folder exists.
+* Claude path exists.
 """
 
 from __future__ import annotations
@@ -18,9 +27,13 @@ from rich.console import Console
 from rich.table import Table
 
 from claude_sync.utils.claude_locator import ClaudeLocator
-from claude_sync.utils.config import is_initialized
-from claude_sync.utils.exporter import DATA_SUBDIR, EXPORT_SUBDIRS
-from claude_sync.utils.importer import ClaudeImporter
+from claude_sync.utils.config import get_manifest_path, is_initialized, read_manifest
+from claude_sync.utils.importer import ProjectImporter
+from claude_sync.utils.project_identity import (
+    get_project_metadata_path,
+    read_project_metadata,
+)
+from claude_sync.utils.project_path import project_to_claude_folder
 
 console = Console()
 
@@ -35,14 +48,7 @@ def run_import(
     claude_path: Path | None = None,
     no_backup: bool = False,
 ) -> None:
-    """Programmatic entry point used by `pull` and other callers.
-
-    Mirrors the Typer option set on `import_cmd` but takes plain args so
-    it can be called from Python code (e.g. `commands/pull.py`) without
-    going through the CLI parser.
-    """
-    # Delegate to the CLI command function. typer.Option defaults on
-    # `import_cmd` make it safe to call without any kwargs.
+    """Programmatic entry point used by `pull` and other callers."""
     import_cmd(
         project_root=project_root,
         claude_path=claude_path,
@@ -50,7 +56,7 @@ def run_import(
     )
 
 
-def import_cmd(  # noqa: A001 — Typer binds the public name `import_data`.
+def import_cmd(  # noqa: A001
     project_root: Path | None = typer.Option(
         None,
         "--project-root",
@@ -65,7 +71,7 @@ def import_cmd(  # noqa: A001 — Typer binds the public name `import_data`.
         None,
         "--claude-path",
         help=(
-            "Override the destination Claude directory. By default we "
+            "Override the Claude directory. By default we "
             "look it up via ClaudeLocator."
         ),
         exists=False,
@@ -78,44 +84,109 @@ def import_cmd(  # noqa: A001 — Typer binds the public name `import_data`.
         "--no-backup",
         help="Skip the safety backup. Off by default; only enable in tests/throwaway envs.",
     ),
+    local_project_path: Path | None = typer.Option(
+        None,
+        "--local-project-path",
+        help=(
+            "Override the local project path used to compute the Claude project "
+            "folder. By default we use ``cwd.resolve()``."
+        ),
+        exists=False,
+        file_okay=False,
+        dir_okay=True,
+        resolve_path=True,
+    ),
 ) -> None:
-    """Import Claude Code data from the current sync project."""
+    """Import Claude Code data for the current project."""
     root = _resolve_root(project_root)
 
     if not is_initialized(root):
-        console.print("[red]✗[/red] Project not initialized")
+        console.print("[red]\u2717[/red] Project not initialized")
         console.print("  Run [cyan]claude-sync init[/cyan] first.")
         raise typer.Exit(code=1)
 
-    # Resolve destination: explicit flag wins, otherwise locate it.
+    # --- Safety validations ---
+    meta_path = get_project_metadata_path(root)
+    meta = read_project_metadata(meta_path)
+    if meta is None:
+        console.print("[red]\u2717[/red] project.json not found")
+        console.print("  Run [cyan]claude-sync init[/cyan] first.")
+        raise typer.Exit(code=1)
+
+    # Resolve Claude path first (needed before export check)
     if claude_path is None:
         claude_path = ClaudeLocator().find_claude_path()
     if claude_path is None:
-        console.print("[red]✗[/red] Claude Path: Not Found")
+        console.print("[red]\u2717[/red] Claude Path: Not Found")
         console.print("  Pass [cyan]--claude-path[/cyan] to specify a destination.")
         raise typer.Exit(code=1)
 
-    importer = ClaudeImporter(claude_path=claude_path, project_root=root)
+    export_root = root / ".claude-sync" / "export" / "project"
+    if not export_root.is_dir():
+        console.print(
+            f"[yellow]![/yellow] No export data found: {export_root}"
+        )
+        console.print("  Run [cyan]claude-sync export[/cyan] first.")
+        raise typer.Exit(code=1)
+
+    # --- Phase 4: Validation warning (do not abort) ---
+    # If the project_name in project.json doesn't match the current
+    # machine's computed Claude folder name, warn the user but still
+    # proceed with the import.
+    local_path_for_validation = (
+        local_project_path if local_project_path is not None else root.resolve()
+    )
+    current_claude_folder = project_to_claude_folder(local_path_for_validation)
+    if meta.project_name and meta.project_name != current_claude_folder:
+        console.print(
+            f"[yellow]![/yellow] Mapping Mismatch: project.json says "
+            f"[bold]{meta.project_name}[/bold] but current folder is "
+            f"[bold]{current_claude_folder}[/bold]."
+        )
+        console.print(
+            "  [yellow]Importing anyway. "
+            "Data will be restored using the current folder name.[/yellow]"
+        )
+        console.print()
+
+    # Also surface any source vs current difference recorded in the manifest.
+    manifest_path = get_manifest_path(root)
+    if manifest_path.is_file():
+        manifest_data = read_manifest(root) or {}
+        source_folder = manifest_data.get("source_claude_project_folder")
+        if source_folder and source_folder != current_claude_folder:
+            console.print(
+                f"[yellow]![/yellow] Source folder "
+                f"[bold]{source_folder}[/bold] differs from current "
+                f"[bold]{current_claude_folder}[/bold]. "
+                "Data will be restored under the current folder name."
+            )
+            console.print()
+
+    importer = ProjectImporter(
+        claude_path=claude_path,
+        project_root=root,
+        local_project_path=local_project_path,
+    )
     report = importer.import_data(backup=not no_backup)
 
-    # ------------------------------------------------------------------
-    # Output
-    # ------------------------------------------------------------------
-    if report.file_count == 0 and not report.restored:
+    # --- Output ---
+    if report.file_count == 0 and not report.claude_project_folder:
         console.print(
-            f"[yellow]![/yellow] Nothing to import: {report.data_root} does not exist."
+            f"[yellow]![/yellow] Nothing to import: {report.data_root} does not exist or is empty."
         )
         console.print("  Run [cyan]claude-sync export[/cyan] first.")
         raise typer.Exit(code=1)
 
     console.print(
-        f"[bold]Importing from:[/bold] {report.data_root}\n"
-        f"[bold]Importing to:[/bold]   {report.claude_path}\n"
+        f"[bold]Importing from:[/bold]     {report.data_root}\n"
+        f"[bold]Claude project folder:[/bold] {report.claude_project_folder}\n"
+        f"[bold]Importing to:[/bold]       {report.target_project_path}\n"
     )
 
     if report.backup_path is not None:
         console.print(
-            f"[green]✓[/green] Backup created: [bold]{report.backup_path}[/bold]\n"
+            f"[green]\u2713[/green] Backup created: [bold]{report.backup_path}[/bold]\n"
         )
 
     table = Table(
@@ -123,28 +194,18 @@ def import_cmd(  # noqa: A001 — Typer binds the public name `import_data`.
         show_header=True,
         header_style="bold cyan",
     )
-    table.add_column("Subdir", style="bold")
-    table.add_column("Files", justify="right")
-    table.add_column("Status", justify="center")
+    table.add_column("Metric", style="bold")
+    table.add_column("Value", justify="right")
 
-    for name in EXPORT_SUBDIRS:
-        if name in report.restored:
-            count = report.restored[name]
-            table.add_row(name, str(count), "[green]restored[/green]")
-        else:
-            table.add_row(name, "—", "[yellow]skipped (no data)[/yellow]")
+    table.add_row("Claude project folder", report.claude_project_folder)
+    table.add_row("Files restored", str(report.file_count))
+    table.add_row(
+        "Backup",
+        str(report.backup_path) if report.backup_path else "N/A",
+    )
 
     console.print(table)
-
-    # Individual files section (Tahap 6b)
-    if report.restored_files or report.skipped_files:
-        console.print("\n[bold]Individual Files:[/bold]")
-        for f in report.restored_files:
-            console.print(f"  [green]✓[/green] {f}")
-        for f in report.skipped_files:
-            console.print(f"  [yellow]•[/yellow] {f} [dim](skipped, not in export)[/dim]")
-
     console.print(
-        f"\n[bold green]✓[/bold green] Imported {report.file_count} files "
-        f"from [bold]{DATA_SUBDIR}/[/bold]"
+        f"\n[bold green]\u2713[/bold green] Imported {report.file_count} files "
+        f"into [bold]projects/{report.claude_project_folder}/[/bold]"
     )

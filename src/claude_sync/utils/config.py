@@ -1,7 +1,7 @@
 """Configuration helpers: paths and manifest handling.
 
 This module is the single source of truth for filesystem locations
-used by the `init` and `status` commands.
+used by the ``init`` and ``status`` commands.
 """
 
 from __future__ import annotations
@@ -17,11 +17,11 @@ SYNC_DIR_NAME = ".claude-sync"
 MANIFEST_FILENAME = "manifest.json"
 
 # Current manifest schema version.
-MANIFEST_VERSION = 1
+MANIFEST_VERSION = 2
 
 
 def get_sync_dir(project_root: Path | None = None) -> Path:
-    """Return the path to the `.claude-sync` directory.
+    """Return the path to the ``.claude-sync`` directory.
 
     Args:
         project_root: Base directory. Defaults to the current working directory.
@@ -34,7 +34,7 @@ def get_sync_dir(project_root: Path | None = None) -> Path:
 
 
 def get_manifest_path(project_root: Path | None = None) -> Path:
-    """Return the path to `manifest.json` inside the sync directory."""
+    """Return the path to ``manifest.json`` inside the sync directory."""
     return get_sync_dir(project_root) / MANIFEST_FILENAME
 
 
@@ -44,6 +44,18 @@ def build_manifest(project_name: str) -> dict[str, Any]:
         "project_name": project_name,
         "version": MANIFEST_VERSION,
     }
+
+
+def read_manifest(project_root: Path | None = None) -> dict[str, Any] | None:
+    """Read the manifest from the sync dir; return None if missing or invalid."""
+    manifest_path = get_manifest_path(project_root)
+    if not manifest_path.is_file():
+        return None
+    try:
+        data = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+    return data if isinstance(data, dict) else None
 
 
 def write_manifest(manifest_path: Path, manifest: dict[str, Any]) -> None:

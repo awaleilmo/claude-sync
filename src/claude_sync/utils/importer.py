@@ -1,20 +1,22 @@
 """Restore data from a sync project back into a Claude Code directory.
 
-This module is the inverse of `exporter.py`. It mirrors the on-disk
-payload from `<project>/.claude-sync/data/` into a target
-`.claude` directory, after first creating a timestamped safety
-backup of whatever is currently in the target.
+This module contains two importers:
+
+1. **``ClaudeImporter``** (legacy) — restores the entire ``.claude/``
+   directory from ``<project>/.claude-sync/data/``. Kept for backward
+   compatibility.
+
+2. **``ProjectImporter``** (Phase 3) — restores only the current
+   project's Claude data from ``.claude-sync/export/project/<folder>/``
+   into ``~/.claude/projects/<current-project>/``.
 
 Design notes:
 
-* The backup is a sibling of the target (not nested inside it) so
-  that `rmtree(target)` cannot possibly reach it.
-* "Wipe and rewrite" semantics are reused from the exporter side:
-  the target is wiped and recreated on every run. The previous
-  contents are always available in the backup directory.
-* Time stamps are local-time with second precision — the same
-  layout you'd get from `date +%Y%m%d-%H%M%S` — so they sort
-  lexically as well as chronologically.
+* Backups are siblings of the target (not nested) so that
+  ``rmtree(target)`` cannot reach them.
+* "Wipe and rewrite" semantics: the target is wiped and recreated on
+  every run. The previous contents are always in the backup directory.
+* Timestamps are local-time with second precision.
 """
 
 from __future__ import annotations
@@ -199,3 +201,145 @@ def _count_files(root: Path) -> int:
     except OSError:
         return 0
     return count
+
+
+# ---------------------------------------------------------------------------
+# Phase 3: Project-based importer
+# ---------------------------------------------------------------------------
+
+# Backup subdirectory inside ~/.claude/
+BACKUP_SUBDIR = "backups"
+
+
+@dataclass
+class ProjectImportReport:
+    """Summary of a Phase 3 project-based import run."""
+
+    claude_path: Path
+    data_root: Path
+    target_project_path: Path
+    claude_project_folder: str
+    backup_path: Path | None
+    file_count: int = 0
+    backup_existed: bool = False
+
+
+class ProjectImporter:
+    """Restore only the current project's Claude data.
+
+    Source: ``<project>/.claude-sync/export/project/<folder>/``
+    Target: ``<claude_path>/projects/<current-project-folder>/``
+    Backup: ``<claude_path>/backups/<folder>-YYYYMMDD-HHMMSS``
+
+    This importer never touches other projects in ``~/.claude/projects/``.
+    """
+
+    def __init__(
+        self,
+        claude_path: Path,
+        project_root: Path,
+        local_project_path: Path | None = None,
+    ) -> None:
+        self.claude_path = claude_path
+        self.project_root = project_root
+        self.local_project_path = (
+            local_project_path
+            if local_project_path is not None
+            else Path.cwd().resolve()
+        )
+
+    @property
+    def export_root(self) -> Path:
+        """Root of the project export data."""
+        return self.project_root / ".claude-sync" / "export" / "project"
+
+    def _resolve_claude_folder(self) -> str:
+        """Compute the Claude project folder name for the local path."""
+        from claude_sync.utils.project_path import project_to_claude_folder
+        return project_to_claude_folder(self.local_project_path)
+
+    def _find_export_source(self) -> Path | None:
+        """Find the exported project folder in .claude-sync/export/project/.
+
+        There should be exactly one subfolder. Returns None if no export exists.
+        """
+        if not self.export_root.is_dir():
+            return None
+        subdirs = [p for p in self.export_root.iterdir() if p.is_dir()]
+        if not subdirs:
+            return None
+        # Return the first (and should be only) project folder
+        return subdirs[0]
+
+    def import_data(self, backup: bool = True) -> ProjectImportReport:
+        """Run the project-based import.
+
+        Steps:
+        1. Validate that export data exists.
+        2. Determine current machine's Claude project folder name.
+        3. If target folder exists, back it up (only the project folder).
+        4. Restore exported data to target folder.
+
+        Args:
+            backup: When False, skip the safety backup. Default True.
+        """
+        # Step 1: Find export source
+        source = self._find_export_source()
+        if source is None:
+            return ProjectImportReport(
+                claude_path=self.claude_path,
+                data_root=self.export_root,
+                target_project_path=self.claude_path,
+                claude_project_folder="",
+                backup_path=None,
+                file_count=0,
+            )
+
+        # Step 2: Resolve current machine's Claude folder name
+        claude_folder = self._resolve_claude_folder()
+        projects_dir = self.claude_path / "projects"
+        target = projects_dir / claude_folder
+
+        # Step 3: Backup existing target (only the project folder)
+        backup_path: Path | None = None
+        backup_existed = target.exists()
+        if backup and backup_existed:
+            backup_path = self._make_project_backup(target)
+        elif not backup and backup_existed:
+            shutil.rmtree(target)
+
+        # Step 4: Restore
+        projects_dir.mkdir(parents=True, exist_ok=True)
+        shutil.copytree(source, target, dirs_exist_ok=False)
+
+        file_count = _count_files(target)
+
+        return ProjectImportReport(
+            claude_path=self.claude_path,
+            data_root=self.export_root,
+            target_project_path=target,
+            claude_project_folder=claude_folder,
+            backup_path=backup_path,
+            file_count=file_count,
+            backup_existed=backup_existed,
+        )
+
+    def _make_project_backup(self, target: Path) -> Path:
+        """Create a timestamped backup of the project folder.
+
+        Backup location: ``<claude_path>/backups/<folder>-YYYYMMDD-HHMMSS``
+        """
+        backup_dir = self.claude_path / BACKUP_SUBDIR
+        backup_dir.mkdir(parents=True, exist_ok=True)
+
+        stem = f"{target.name}-{datetime.now().strftime(BACKUP_SUFFIX_FORMAT)}"
+        candidate = backup_dir / stem
+        suffix_n = 0
+        while candidate.exists():
+            suffix_n += 1
+            candidate = backup_dir / f"{stem}-{suffix_n}"
+
+        shutil.copytree(target, candidate, dirs_exist_ok=False)
+        # Remove the original after successful backup copy
+        shutil.rmtree(target)
+        return candidate

@@ -29,7 +29,7 @@ def test_init_creates_sync_dir_and_manifest(tmp_path: Path, monkeypatch) -> None
 
     data = json.loads(manifest.read_text(encoding="utf-8"))
     assert data["project_name"] == tmp_path.name
-    assert data["version"] == 1
+    assert data["version"] == 2
 
 
 def test_init_is_idempotent(tmp_path: Path, monkeypatch) -> None:
@@ -63,4 +63,4 @@ def test_init_force_overwrites_manifest(tmp_path: Path, monkeypatch) -> None:
     data = json.loads(manifest.read_text(encoding="utf-8"))
     # --force restores the default values, replacing the old payload.
     assert data["project_name"] == tmp_path.name
-    assert data["version"] == 1
+    assert data["version"] == 2
