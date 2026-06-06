@@ -37,9 +37,13 @@
 ## Phase 5: Compression Package
 - [x] Kompresi export package
 - [x] Optimasi ukuran transfer
+- [x] Import dari claudepack
+- [x] Status command menampilkan package format info
 
 ## Phase 6: AES Encryption
-- [ ] Encryption untuk data sensitif
+- [x] Crypto foundation (AES-256-GCM + PBKDF2HMAC)
+- [ ] Encryption di export
+- [ ] Decryption di import
 - [ ] Password-based key derivation
 
 ## Phase 7: Migration Tool

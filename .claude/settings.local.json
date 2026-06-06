@@ -39,7 +39,9 @@
       "Bash(pip show *)",
       "Bash(pip install *)",
       "Bash(python -m pytest -v)",
-      "Bash(python -m pytest tests/ -x --tb=short)"
+      "Bash(python -m pytest tests/ -x --tb=short)",
+      "Bash(xxd /home/awal/workspace/claude-sync/docs/progress.md)",
+      "Bash(python3 *)"
     ]
   }
 }

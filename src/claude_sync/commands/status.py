@@ -7,6 +7,7 @@ Reports:
 3. The Claude Code project folder detected for this local project.
 4. Whether the Claude Code configuration directory is reachable.
 5. Export availability (Phase 3).
+6. Package format and availability (Phase 5C).
 """
 
 from __future__ import annotations
@@ -25,6 +26,8 @@ from claude_sync.utils.config import (
 )
 from claude_sync.utils.project_identity import get_project_metadata_path, read_project_metadata
 from claude_sync.utils.project_path import locate_claude_project, project_to_claude_folder
+
+_claudepack_filename = "project.claudepack"
 
 console = Console()
 
@@ -149,6 +152,22 @@ def status(
         console.print(
             "[dim]\u2022[/dim] Source Claude Folder:  [dim]not recorded (run 'claude-sync export')[/dim]"
         )
+
+    # Package Format (Phase 5C)
+    claudepack_path = sync_dir / _claudepack_filename
+    if claudepack_path.is_file():
+        size_bytes = claudepack_path.stat().st_size
+        if size_bytes >= 1_048_576:
+            size_str = f"{size_bytes / 1_048_576:.1f} MB"
+        else:
+            size_str = f"{size_bytes / 1024:.1f} KB"
+        console.print(f"[dim]\u2022[/dim] Package Format:     [bold]Claudepack[/bold]")
+        console.print(f"[dim]\u2022[/dim] Package Available:  [green]Yes[/green]")
+        console.print(f"[dim]\u2022[/dim] Package Size:       [bold]{size_str}[/bold]")
+    else:
+        console.print(f"[dim]\u2022[/dim] Package Format:     [bold]Folder[/bold]")
+        console.print(f"[dim]\u2022[/dim] Package Available:  [yellow]No[/yellow]")
+        console.print(f"[dim]\u2022[/dim] Package Size:       [dim]N/A[/dim]")
 
     # Section 2: Claude Code install status
     console.print()

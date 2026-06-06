@@ -243,3 +243,94 @@ prioritas di atas format folder lama.
 
 Phase 5C (Status/Doctor), Phase 6 (Encryption), dan Phase 7
 (Migration) bukan bagian dari pekerjaan ini.
+
+---
+
+# Progress - Phase 5C: Package Status & Tracking
+
+## Tanggal
+2026-06-06
+
+## Perubahan yang Dilakukan
+
+### Tujuan Phase 5C
+
+Menambahkan informasi package ke `status` command.
+
+### File yang Diubah
+
+1. `src/claude_sync/commands/status.py`
+   - Tambah section "Package Format" setelah Source Claude Folder.
+   - Cek keberadaan `project.claudepack` di `.claude-sync/`.
+   - Jika ada: tampilkan `Claudepack`, `Yes`, dan ukuran file.
+   - Jika tidak ada: tampilkan `Folder`, `No`, `N/A`.
+   - Format ukuran: MB jika >= 1MB, KB jika < 1MB.
+
+### File yang Tidak Diubah
+- `commands/export.py`, `utils/exporter.py` — tidak disentuh.
+- `commands/import_cmd.py`, `utils/importer.py` — tidak disentuh.
+- Doctor command — tidak ada (belum ada di codebase).
+- `utils/config.py`, `utils/project_path.py` — tidak diubah.
+
+## Alasan Perubahan
+- User perlu tahu format package yang tersedia sebelum export/import.
+- Package size membantu estimasi transfer time dan storage.
+
+## Status
+- [x] Package format info di `status` command
+- [x] Tampilkan Claudepack/Folder berdasarkan keberadaan `project.claudepack`
+- [x] Tampilkan Package Available (Yes/No)
+- [x] Tampilkan Package Size dengan format manusia-membaca
+- [x] Dokumentasi progress dan plan diperbarui
+
+## STOP — Phase 5C selesai
+
+Phase 6 (Encryption), Phase 7 (Migration) bukan bagian dari pekerjaan ini.
+
+---
+
+# Progress - Phase 6A: Crypto Foundation
+
+## Tanggal
+2026-06-06
+
+## Perubahan yang Dilakukan
+
+### Tujuan Phase 6A
+
+Membuat fondasi encryption yang akan digunakan pada phase berikutnya.
+Phase ini BELUM mengaktifkan encryption pada export/import.
+
+### File Baru
+
+1. `src/claude_sync/utils/crypto.py`
+   - `derive_key(password, salt)` — PBKDF2HMAC + SHA256, 32-byte key, 480k iter
+   - `encrypt_bytes(data, password)` — AES-256-GCM, payload: MAGIC+VERSION+SALT+NONCE+CIPHERTEXT
+   - `decrypt_bytes(payload, password)` — parse payload, validate magic/version, decrypt
+   - Konstanta: MAGIC=`CSYN`, VERSION=1, SALT=16 byte, NONCE=12 byte, KDF=480k iter
+
+### File yang Diubah
+
+1. `pyproject.toml`
+   - Tambah `cryptography>=42.0.0` ke dependencies
+
+### File yang Tidak Diubah
+- `commands/export.py`, `utils/exporter.py` — tidak disentuh.
+- `commands/import_cmd.py`, `utils/importer.py` — tidak disentuh.
+- `commands/status.py` — tidak disentuh.
+- `utils/config.py` — tidak disentuh.
+
+## Alasan Perubahan
+- Phase 6+ membutuhkan fondasi crypto yang konsisten.
+- AES-256-GCM menyediakan confidentiality + integrity (authenticated encryption).
+- PBKDF2HMAC dengan 480k iter sesuai rekomendasi NIST untuk key derivation.
+
+## Status
+- [x] `crypto.py` utility dengan derive_key, encrypt_bytes, decrypt_bytes
+- [x] Payload format: MAGIC + VERSION + SALT + NONCE + CIPHERTEXT
+- [x] `cryptography>=42.0.0` ditambahkan ke dependencies
+- [x] Dokumentasi progress dan plan diperbarui
+
+## STOP — Phase 6A selesai
+
+Phase 6B, Phase 6C, Phase 7 bukan bagian dari pekerjaan ini.
