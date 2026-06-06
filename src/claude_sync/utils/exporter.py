@@ -18,6 +18,7 @@ continue to import them unchanged.
 
 from __future__ import annotations
 
+import os
 import shutil
 import tempfile
 import zipfile
@@ -92,6 +93,7 @@ class ProjectExportReport:
     file_count: int = 0
     copied: dict[str, int] = field(default_factory=dict)
     skipped: tuple[str, ...] = ()
+    claudepack_path: Path | None = None
 
 
 # ---------------------------------------------------------------------------
@@ -250,6 +252,16 @@ class ProjectExporter:
                 total_files += 1
                 copied[item.name] = 1
 
+        # Build claudepack ZIP package.
+        # Import here to avoid circular imports.
+        from claude_sync.utils.config import get_manifest_path
+
+        pack_path = build_claudepack(
+            project_root=self.project_root,
+            source_folder=data_root,
+            manifest_path=get_manifest_path(self.project_root),
+        )
+
         # data_root untuk report = export root (bukan project folder)
         report_data_root = self.data_root
 
@@ -260,8 +272,73 @@ class ProjectExporter:
             claude_project_folder=folder_name,
             file_count=total_files,
             copied=copied,
+            claudepack_path=pack_path,
         )
         return report
+
+
+def build_claudepack(
+    project_root: Path,
+    source_folder: Path,
+    manifest_path: Path,
+) -> Path:
+    """Create a ``project.claudepack`` ZIP from export data.
+
+    Package contents::
+
+        project/
+        manifest.json
+
+    ``project.json`` is intentionally excluded — it lives alongside
+    the package in ``.claude-sync/``.
+
+    Returns the absolute path to the ``.claudepack`` file.
+    """
+    sync_dir = project_root / ".claude-sync"
+    pack_path = sync_dir / CLAUDEPACK_FILENAME
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        # --- Copy source folder as ``project/`` inside ZIP ---
+        proj_dir = tmp_path / "project"
+        _copy_tree(source_folder, proj_dir)
+
+        # --- Copy manifest ---
+        manifest_copy = tmp_path / "manifest.json"
+        manifest_copy.write_bytes(manifest_path.read_bytes())
+
+        # --- Write ZIP ---
+        with zipfile.ZipFile(
+            pack_path, "w", zipfile.ZIP_DEFLATED
+        ) as zf:
+            for root_dir, dirs, files in os.walk(tmp_path):
+                root = Path(root_dir)
+                for fname in files:
+                    file_path = root / fname
+                    arc_name = str(file_path.relative_to(tmp_path))
+                    zf.write(file_path, arc_name)
+
+    return pack_path
+
+
+def _copy_tree(src: Path, dst: Path) -> None:
+    """Recursively copy *src* to *dst*.
+
+    Lightweight version of ``shutil.copytree`` that preserves
+    permissions via ``copy2``.
+    """
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    if src.is_dir():
+        dst.mkdir(parents=True, exist_ok=True)
+        for item in src.iterdir():
+            target = dst / item.name
+            if item.is_dir():
+                _copy_tree(item, target)
+            else:
+                shutil.copy2(item, target)
+    else:
+        shutil.copy2(src, dst)
 
 
 def _count_files(root: Path) -> int:

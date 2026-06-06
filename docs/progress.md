@@ -123,8 +123,123 @@ Phase 4 menambahkan:
 - [x] Semua 92 test pass
 - [x] Dokumentasi progress dan plan diperbarui
 
-## STOP — Phase 4 selesai
+## STOP — Phase 5A selesai
 
-Phase 5 (Compression), Phase 6 (Encryption), dan Phase 7
+Phase 5B (Compression), Phase 6 (Encryption), dan Phase 7
 (Migration) bukan bagian dari pekerjaan ini dan sengaja tidak
 dimulai.
+
+---
+
+# Progress - Phase 5A: Claudepack Export
+
+## Tanggal
+2026-06-06
+
+## Perubahan yang Dilakukan
+
+### Tujuan Phase 5A
+
+Mengubah format export dari folder menjadi package ZIP tunggal
+(`project.claudepack`). File ZIP adalah standar zip tanpa enkripsi
+dan tanpa password. Isi ZIP hanya `project/` dan `manifest.json`.
+`project.json` TIDAK termasuk dalam ZIP.
+
+### File yang Diubah
+
+1. `src/claude_sync/utils/exporter.py`
+   - Tambah field `claudepack_path: Path | None = None` ke
+     `ProjectExportReport`.
+   - Tambah fungsi `build_claudepack(project_root, source_folder,
+     manifest_path)`:
+     - Buat `tempfile.TemporaryDirectory()` untuk staging.
+     - Salin source export folder sebagai `project/` di staging.
+     - Salin `manifest.json` ke staging.
+     - Buat ZIP dengan `zipfile.ZIP_DEFLATED`.
+     - Hapus staging dir (context manager).
+     - Kembalikan Path ke `.claudepack`.
+   - Tambah fungsi `_copy_tree(src, dst)` sebagai helper copy
+     rekursif ringan.
+   - Panggil `build_claudepack()` di akhir `ProjectExporter.export()`.
+   - Tambah `import os` di import section.
+
+2. `src/claude_sync/commands/export.py`
+   - Setelah export summary, tampilkan path `project.claudepack`
+     jika `report.claudepack_path` tidak None.
+
+### File yang Tidak Diubah
+- `commands/import_cmd.py`, `utils/importer.py` — tidak ada
+  logic import dari claudepack (larangan Phase 5A).
+- `commands/status.py`, `push.py`, `pull.py`, `trace.py` —
+  tidak disentuh.
+- `utils/config.py`, `utils/project_path.py` — tidak diubah.
+- Semua file `tests/` — mode IMPLEMENTATION ONLY.
+
+## Alasan Perubahan
+- Phase 5A membuat export lebih portabel dengan format ZIP.
+- Folder export lama tetap ada (backward compatibility).
+- Tidak ada dependency baru, hanya `zipfile` dari standard library.
+
+## Status
+- [x] `build_claudepack()` helper di `exporter.py`
+- [x] Field `claudepack_path` di `ProjectExportReport`
+- [x] Panggil `build_claudepack()` di akhir `ProjectExporter.export()`
+- [x] Output console menampilkan lokasi claudepack
+- [x] Folder export lama tetap ada
+- [x] Dokumentasi progress dan plan diperbarui
+
+## STOP — Phase 5A selesai
+
+Phase 5B (Compression), Phase 6 (Encryption), dan Phase 7
+(Migration) bukan bagian dari pekerjaan ini dan sengaja tidak
+dimulai.
+
+---
+
+# Progress - Phase 5B: Claudepack Import
+
+## Tanggal
+2026-06-06
+
+## Perubahan yang Dilakukan
+
+### Tujuan Phase 5B
+
+Menambahkan dukungan import dari `project.claudepack` dengan
+prioritas di atas format folder lama.
+
+### File yang Diubah
+
+1. `src/claude_sync/utils/importer.py`
+   - Tambah property `claudepack_path` di `ProjectImporter`.
+   - Tambah method `has_claudepack()` — validasi ZIP via `testzip()`.
+   - Tambah method `extract_claudepack()` — extract ke `.claude-sync/.extracted/`,
+     raise `ValueError` jika corrupt.
+   - Tambah method `_find_claudepack_source()` — prioritas claudepack > folder.
+   - Update `import_data()` — gunakan `actual_source = source / "project"`
+     saat `source_type == "claudepack"` agar hanya isi `project/`
+     yang di-restore, bukan seluruh extracted dir.
+
+2. `src/claude_sync/commands/import_cmd.py`
+   - Cek `project.claudepack` sebelum folder export.
+   - Validasi ZIP sebelum restore dimulai.
+   - Fallback ke `.claude-sync/export/` jika claudepack tidak ada.
+   - Tampilkan label source type di output.
+
+### File yang Tidak Diubah
+- `utils/exporter.py`, `commands/export.py` — tidak disentuh.
+- `commands/status.py` — tidak disentuh.
+
+## Status
+- [x] Import dari `project.claudepack` berfungsi
+- [x] Prioritas claudepack > folder export
+- [x] Fallback ke format lama jika claudepack tidak ada
+- [x] Validasi corrupt ZIP dengan error yang jelas
+- [x] Restore hanya dari `project/` subdirectory (bukan root extracted)
+- [x] 9/9 test importer pass
+- [x] Dokumentasi progress diperbarui
+
+## STOP — Phase 5B selesai
+
+Phase 5C (Status/Doctor), Phase 6 (Encryption), dan Phase 7
+(Migration) bukan bagian dari pekerjaan ini.

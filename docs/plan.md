@@ -35,8 +35,8 @@
 - [x] Semua 92 test pass
 
 ## Phase 5: Compression Package
-- [ ] Kompresi export package
-- [ ] Optimasi ukuran transfer
+- [x] Kompresi export package
+- [x] Optimasi ukuran transfer
 
 ## Phase 6: AES Encryption
 - [ ] Encryption untuk data sensitif

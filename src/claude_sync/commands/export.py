@@ -164,3 +164,9 @@ def export(
         f"\n[bold green]✓[/bold green] Exported {report.file_count} files "
         f"into [bold]export/project/{report.claude_project_folder}/[/bold]"
     )
+
+    if report.claudepack_path is not None:
+        console.print(
+            f"[bold green]✓[/bold green] Claudepack saved at "
+            f"[bold]{report.claudepack_path}[/bold]"
+        )

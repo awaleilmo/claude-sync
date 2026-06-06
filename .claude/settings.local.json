@@ -38,7 +38,8 @@
       "Bash(echo \"exit: $?\")",
       "Bash(pip show *)",
       "Bash(pip install *)",
-      "Bash(python -m pytest -v)"
+      "Bash(python -m pytest -v)",
+      "Bash(python -m pytest tests/ -x --tb=short)"
     ]
   }
 }

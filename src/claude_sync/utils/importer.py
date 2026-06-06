@@ -442,7 +442,8 @@ class ProjectImporter:
 
         # Step 4: Restore
         projects_dir.mkdir(parents=True, exist_ok=True)
-        shutil.copytree(source, target, dirs_exist_ok=False)
+        actual_source = source / "project" if source_type == "claudepack" else source
+        shutil.copytree(actual_source, target, dirs_exist_ok=False)
 
         file_count = _count_files(target)
 
