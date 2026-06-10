@@ -129,7 +129,7 @@ def test_export_copies_project_data(
     init_result = runner.invoke(app, ["init"])
     assert init_result.exit_code == 0, init_result.output
 
-    export_result = runner.invoke(app, ["export"])
+    export_result = runner.invoke(app, ["export"], input="test123\n")
     assert export_result.exit_code == 0, export_result.output
 
     # Verify project folder exists in export destination.
@@ -165,7 +165,7 @@ def test_export_is_idempotent(
 
     runner = CliRunner()
     runner.invoke(app, ["init"])
-    runner.invoke(app, ["export"])
+    runner.invoke(app, ["export"], input="test123\n")
 
     # Plant a stale file in the destination.
     from claude_sync.utils.project_path import project_to_claude_folder
@@ -182,7 +182,7 @@ def test_export_is_idempotent(
     stale.parent.mkdir(parents=True, exist_ok=True)
     stale.write_text("stale", encoding="utf-8")
 
-    runner.invoke(app, ["export"])
+    runner.invoke(app, ["export"], input="test123\n")
 
     assert not stale.exists(), "stale file should have been wiped"
 
@@ -205,7 +205,7 @@ def test_export_with_explicit_claude_path(
     runner.invoke(app, ["init"])
 
     result = runner.invoke(
-        app, ["export", "--claude-path", str(claude)]
+        app, ["export", "--claude-path", str(claude)], input="test123\n"
     )
     assert result.exit_code == 0, result.output
 

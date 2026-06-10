@@ -29,6 +29,7 @@ Side effects:
 
 from __future__ import annotations
 
+import getpass
 from pathlib import Path
 
 import typer
@@ -117,10 +118,17 @@ def export(
         console.print("  Install Claude Code or pass [cyan]--claude-path[/cyan].")
         raise typer.Exit(code=1)
 
+    # Phase 6B: prompt for encryption password
+    password = getpass.getpass("Enter Encryption Password: ")
+    if not password:
+        console.print("[red]✗[/red] Password cannot be empty")
+        raise typer.Exit(code=1)
+
     exporter = ProjectExporter(
         claude_path=claude_path,
         project_root=root,
         local_project_path=local_project_path,
+        password=password,
     )
 
     try:
@@ -136,6 +144,10 @@ def export(
     manifest_data = read_manifest(root) or {}
     manifest_data["source_project_path"] = str(report.source_project_path)
     manifest_data["source_claude_project_folder"] = report.claude_project_folder
+    # Phase 6B: encryption metadata
+    manifest_data["package_version"] = 2
+    manifest_data["encrypted"] = True
+    manifest_data["algorithm"] = "AES-256-GCM"
     write_manifest(manifest_path, manifest_data)
 
     # ------------------------------------------------------------------

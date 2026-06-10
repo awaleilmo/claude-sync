@@ -11,6 +11,22 @@ Phase 3 (Project-Based Import):
 * Backup is per-project (not the whole ``~/.claude``).
 * Other projects in ``~/.claude/projects/`` are never touched.
 
+Phase 4 (Path Mapping Validation):
+
+* Warns (but does not abort) on project.json / source manifest
+  mismatches.
+* Restore always uses the current machine's Claude folder name.
+
+Phase 5B (Claudepack Import):
+
+* Supports ``.claudepack`` ZIP packages (preferred over folder export).
+
+Phase 6C (Decrypt Import):
+
+* Supports encrypted ``.claudepack`` files (AES-256-GCM).
+* Password is requested interactively when ``.claudepack`` is present.
+* Decryption uses ``decrypt_bytes()`` from ``crypto.py``.
+
 Safety validations (abort before any restore if any fail):
 
 * ``project.json`` exists.
@@ -98,10 +114,13 @@ def import_cmd(  # noqa: A001
     ),
 ) -> None:
     """Import Claude Code data for the current project."""
+    import getpass
+    import sys
+
     root = _resolve_root(project_root)
 
     if not is_initialized(root):
-        console.print("[red]\u2717[/red] Project not initialized")
+        console.print("[red]✗[/red] Project not initialized")
         console.print("  Run [cyan]claude-sync init[/cyan] first.")
         raise typer.Exit(code=1)
 
@@ -121,11 +140,18 @@ def import_cmd(  # noqa: A001
         console.print("  Pass [cyan]--claude-path[/cyan] to specify a destination.")
         raise typer.Exit(code=1)
 
-    # Phase 5 Part 2: Check for .claudepack ZIP first
+    # Phase 6C: prompt for encryption password if .claudepack exists
     from claude_sync.utils.exporter import CLAUDEPACK_FILENAME
 
     claudepack_file = root / ".claude-sync" / CLAUDEPACK_FILENAME
     use_claudepack = claudepack_file.is_file()
+
+    password: str | None = None
+    if use_claudepack:
+        password = getpass.getpass("Enter Encryption Password: ")
+        if not password:
+            console.print("[red]\u2717[/red] Password cannot be empty")
+            raise typer.Exit(code=1)
 
     # Validate .claudepack if it exists
     if use_claudepack:
@@ -133,6 +159,7 @@ def import_cmd(  # noqa: A001
             claude_path=claude_path,
             project_root=root,
             local_project_path=local_project_path,
+            password=password,
         )
         try:
             if not importer.has_claudepack():
@@ -203,6 +230,7 @@ def import_cmd(  # noqa: A001
         claude_path=claude_path,
         project_root=root,
         local_project_path=local_project_path,
+        password=password,
     )
     report = importer.import_data(backup=not no_backup)
 

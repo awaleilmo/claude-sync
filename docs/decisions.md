@@ -289,3 +289,66 @@ Run `init` kedua atau ketiga tidak mengubah data. Output CLI menunjukkan status 
 
 **Status:**
 Accepted
+
+---
+
+## 2026-06-09
+
+**Decision:**
+`project.claudepack` berisi AES-256-GCM encrypted ZIP payload, bukan ZIP biasa.
+Password diminta secara interaktif saat export dan tidak pernah disimpan.
+
+**Alternatives:**
+- Public-key encryption (RSA/ECC)
+- Plain ZIP tanpa enkripsi (sebelum Phase 6A)
+- ZIP dengan password bawaan (rentan terhadap known-plaintext)
+
+**Reason:**
+Menggunakan `encrypt_bytes()` dari Phase 6A yang sudah menyediakan AEAD
+(authenticated encryption) via AES-256-GCM. PBKDF2 dengan 480k iterasi
+memberikan key derivation yang kuat. Password tidak disimpan agar tidak
+bocor lewat file atau Git history.
+
+**Impact:**
+- `project.claudepack` tidak bisa dibuka dengan ZIP reader.
+- Manifest mencatat `package_version: 2`, `encrypted: true`, `algorithm: "AES-256-GCM"`.
+- Import dari claudepack akan membutuhkan password yang sama (Phase 6C).
+
+**Status:**
+Accepted
+
+---
+
+## 2026-06-09
+
+**Decision:**
+Phase 6C: Import flow menggunakan `decrypt_bytes()` dari `crypto.py` untuk
+mendecrypt `project.claudepack` yang dienkripsi oleh Phase 6B. Password diminta
+secara interaktif dan tidak pernah disimpan. Temporary extracted directory
+dibersihkan setelah restore.
+
+**Alternatives:**
+- Public-key decryption (RSA/ECC) — tidak digunakan karena export juga symmetric
+- Manual decryption implementation — duplikasi logic
+- Cache password in memory — risiko memory dump
+
+**Reason:**
+- `decrypt_bytes()` dari Phase 6A sudah menyediakan authenticated decryption
+  yang memvalidasi integritas package.
+- PBKDF2 dengan 480k iterasi memberikan key derivation yang konsisten dengan
+  export.
+- AES-256-GCM AEAD menolak wrong password sebagai corrupt package (bukan
+  memberikan pesan error yang berbeda yang bisa bocor informasi).
+- Password diminta ulang setiap kali import untuk menghindari caching.
+- Temporary directory dibersihkan untuk mencegah bocornya data sensitif
+  di filesystem.
+
+**Impact:**
+- Import dari encrypted `.claudepack` sekarang berfungsi penuh.
+- User harus mengingat password yang digunakan saat export.
+- Wrong password menghasilkan error "Failed to decrypt" yang tidak
+  membocorkan informasi apakah package atau password yang salah.
+- Cleanup otomatis mencegah file temporary tertinggal.
+
+**Status:**
+Accepted

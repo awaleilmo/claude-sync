@@ -10,6 +10,13 @@ This module contains two importers:
    project's Claude data from ``.claude-sync/export/project/<folder>/``
    into ``~/.claude/projects/<current-project>/``.
 
+Phase 6C (Decrypt Import):
+
+* Supports importing from encrypted ``.claudepack`` files.
+* Password is requested interactively and never stored.
+* Decryption uses ``decrypt_bytes()`` from crypto.py.
+* AES-256-GCM authenticated decryption validates package integrity.
+
 Design notes:
 
 * Backups are siblings of the target (not nested) so that
@@ -17,11 +24,13 @@ Design notes:
 * "Wipe and rewrite" semantics: the target is wiped and recreated on
   every run. The previous contents are always in the backup directory.
 * Timestamps are local-time with second precision.
+* Temporary extraction directory is cleaned up after import (success or failure).
 """
 
 from __future__ import annotations
 
 import shutil
+import tempfile
 import zipfile
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -32,6 +41,7 @@ from typing import Iterable
 # The constants are kept in `exporter.py` so both sides agree by
 # construction; importing from there avoids a duplicate source of
 # truth.
+from claude_sync.utils.crypto import decrypt_bytes
 from claude_sync.utils.exporter import (
     CLAUDEPACK_FILENAME,
     DATA_SUBDIR,
@@ -277,6 +287,9 @@ class ProjectImporter:
     Target: ``<claude_path>/projects/<current-project-folder>/``
     Backup: ``<claude_path>/backups/<folder>-YYYYMMDD-HHMMSS``
 
+    Phase 6C: Supports encrypted ``.claudepack`` files with password
+    prompt. Password is never stored or cached.
+
     This importer never touches other projects in ``~/.claude/projects/``.
     """
 
@@ -285,6 +298,7 @@ class ProjectImporter:
         claude_path: Path,
         project_root: Path,
         local_project_path: Path | None = None,
+        password: str | None = None,
     ) -> None:
         self.claude_path = claude_path
         self.project_root = project_root
@@ -293,6 +307,7 @@ class ProjectImporter:
             if local_project_path is not None
             else Path.cwd().resolve()
         )
+        self.password = password
 
     @property
     def export_root(self) -> Path:
@@ -358,11 +373,59 @@ class ProjectImporter:
         except zipfile.BadZipFile:
             return False
 
-    def extract_claudepack(self) -> Path:
+    def _is_encrypted_claudepack(self) -> bool:
+        """Check if the .claudepack is encrypted (not a plain ZIP)."""
+        path = self.claudepack_path
+        if not path.is_file():
+            return False
+        try:
+            with open(path, "rb") as f:
+                magic = f.read(4)
+            return magic != b"PK\x03\x04"
+        except OSError:
+            return False
+
+    def _extract_plain_zip(self, extracted_dir: Path, password: str | None = None) -> None:
+        """Extract ZIP, optionally decrypting if encrypted."""
+        path = self.claudepack_path
+        
+        if password and self._is_encrypted_claudepack():
+            with open(path, "rb") as f:
+                encrypted = f.read()
+            try:
+                zip_bytes = decrypt_bytes(encrypted, password)
+            except ValueError as exc:
+                shutil.rmtree(extracted_dir)
+                raise ValueError(
+                    f"Failed to decrypt .claudepack:\n"
+                    f"  Wrong password or corrupted package."
+                )
+            with tempfile.TemporaryDirectory() as tmp:
+                tmp_path = Path(tmp)
+                zip_temp = tmp_path / "package.zip"
+                zip_temp.write_bytes(zip_bytes)
+                with zipfile.ZipFile(zip_temp, "r") as zf:
+                    zf.extractall(extracted_dir)
+        else:
+            try:
+                with zipfile.ZipFile(path, "r") as zf:
+                    zf.extractall(extracted_dir)
+            except zipfile.BadZipFile:
+                shutil.rmtree(extracted_dir)
+                raise ValueError(
+                    f"Corrupt .claudepack file: {path}\n"
+                    "  The file may be incomplete or damaged. "
+                    "Please re-export."
+                )
+
+    def extract_claudepack(self, password: str | None = None) -> Path:
         """Extract ``.claudepack`` into a sub-directory of ``.claude-sync/``.
 
+        If *password* is provided and the package is encrypted, attempts
+        AES-256-GCM decryption before extracting.
+
         Returns the path to the extracted contents.
-        Raises ``ValueError`` if the ZIP is corrupt.
+        Raises ``ValueError`` if the ZIP is corrupt or password is wrong.
         """
         path = self.claudepack_path
         extracted_dir = self.project_root / ".claude-sync" / ".extracted"
@@ -370,17 +433,7 @@ class ProjectImporter:
             shutil.rmtree(extracted_dir)
         extracted_dir.mkdir(parents=True, exist_ok=True)
 
-        try:
-            with zipfile.ZipFile(path, "r") as zf:
-                zf.extractall(extracted_dir)
-        except zipfile.BadZipFile:
-            # Clean up on failure
-            shutil.rmtree(extracted_dir)
-            raise ValueError(
-                f"Corrupt .claudepack file: {path}\n"
-                "  The file may be incomplete or damaged. "
-                "Please re-export."
-            )
+        self._extract_plain_zip(extracted_dir, password)
 
         return extracted_dir
 
@@ -394,7 +447,7 @@ class ProjectImporter:
         Priority: .claudepack > folder export.
         """
         if self.has_claudepack():
-            return self.extract_claudepack(), "claudepack"
+            return self.extract_claudepack(self.password), "claudepack"
 
         source = self._find_export_source()
         if source is not None:
@@ -444,6 +497,12 @@ class ProjectImporter:
         projects_dir.mkdir(parents=True, exist_ok=True)
         actual_source = source / "project" if source_type == "claudepack" else source
         shutil.copytree(actual_source, target, dirs_exist_ok=False)
+
+        # Clean up extracted directory if using .claudepack
+        if source_type == "claudepack":
+            extracted_dir = self.project_root / ".claude-sync" / ".extracted"
+            if extracted_dir.exists():
+                shutil.rmtree(extracted_dir)
 
         file_count = _count_files(target)
 

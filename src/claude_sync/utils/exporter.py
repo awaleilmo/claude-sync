@@ -26,6 +26,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Iterable
 
+from claude_sync.utils.crypto import encrypt_bytes
 from claude_sync.utils.project_path import locate_claude_project
 
 # ---------------------------------------------------------------------------
@@ -189,6 +190,7 @@ class ProjectExporter:
         claude_path: Path,
         project_root: Path,
         local_project_path: Path | None = None,
+        password: str | None = None,
     ) -> None:
         self.claude_path = claude_path
         self.project_root = project_root
@@ -197,6 +199,7 @@ class ProjectExporter:
             if local_project_path is not None
             else Path.cwd().resolve()
         )
+        self.password = password
 
     @property
     def data_root(self) -> Path:
@@ -260,6 +263,7 @@ class ProjectExporter:
             project_root=self.project_root,
             source_folder=data_root,
             manifest_path=get_manifest_path(self.project_root),
+            password=self.password,
         )
 
         # data_root untuk report = export root (bukan project folder)
@@ -281,10 +285,15 @@ def build_claudepack(
     project_root: Path,
     source_folder: Path,
     manifest_path: Path,
+    password: str | None = None,
 ) -> Path:
-    """Create a ``project.claudepack`` ZIP from export data.
+    """Create a ``project.claudepack`` package from export data.
 
-    Package contents::
+    When *password* is provided the ZIP payload is encrypted with
+    AES-256-GCM so the resulting file cannot be opened directly by a
+    ZIP reader.
+
+    Package contents (pre-encryption)::
 
         project/
         manifest.json
@@ -308,16 +317,32 @@ def build_claudepack(
         manifest_copy = tmp_path / "manifest.json"
         manifest_copy.write_bytes(manifest_path.read_bytes())
 
-        # --- Write ZIP ---
-        with zipfile.ZipFile(
-            pack_path, "w", zipfile.ZIP_DEFLATED
-        ) as zf:
+        # --- Build ZIP in temp location ---
+        zip_path = tmp_path / "package.zip"
+        with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
             for root_dir, dirs, files in os.walk(tmp_path):
                 root = Path(root_dir)
                 for fname in files:
+                    if root == tmp_path and fname == "package.zip":
+                        continue
                     file_path = root / fname
                     arc_name = str(file_path.relative_to(tmp_path))
                     zf.write(file_path, arc_name)
+
+        if password:
+            # Encrypt ZIP bytes and write encrypted payload atomically
+            zip_bytes = zip_path.read_bytes()
+            encrypted = encrypt_bytes(zip_bytes, password)
+            tmp_pack = sync_dir / f".{CLAUDEPACK_FILENAME}.tmp"
+            try:
+                tmp_pack.write_bytes(encrypted)
+                tmp_pack.rename(pack_path)
+            except Exception:
+                tmp_pack.unlink(missing_ok=True)
+                raise
+        else:
+            # Legacy plain ZIP
+            shutil.copy2(zip_path, pack_path)
 
     return pack_path
 

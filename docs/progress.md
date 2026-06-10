@@ -331,6 +331,174 @@ Phase ini BELUM mengaktifkan encryption pada export/import.
 - [x] `cryptography>=42.0.0` ditambahkan ke dependencies
 - [x] Dokumentasi progress dan plan diperbarui
 
-## STOP — Phase 6A selesai
+---
 
-Phase 6B, Phase 6C, Phase 7 bukan bagian dari pekerjaan ini.
+# Progress - Phase 6B: Encrypt Export
+
+## Tanggal
+2026-06-09
+
+## Perubahan yang Dilakukan
+
+### Tujuan Phase 6B
+
+Mengaktifkan encryption pada export flow. Setelah Phase 6B,
+`project.claudepack` berisi AES-256-GCM encrypted ZIP payload,
+bukan ZIP biasa. Password diminta secara interaktif saat export.
+
+### File yang Diubah
+
+1. **`src/claude_sync/utils/exporter.py`**
+   - Tambah `from claude_sync.utils.crypto import encrypt_bytes` di import.
+   - Tambah parameter `password: str | None = None` ke `ProjectExporter.__init__`.
+   - Simpan `self.password` untuk digunakan saat build claudepack.
+   - Pass `password=self.password` ke `build_claudepack()`.
+   - Tambah parameter `password: str | None = None` ke `build_claudepack()`.
+   - Ubah implementasi: ZIP dibuild di temp file, lalu jika `password`
+     disediakan: baca ZIP bytes, encrypt dengan `encrypt_bytes()`,
+     tulis encrypted payload ke `project.claudepack`.
+   - Jika password tidak disediakan: fallback ke plain ZIP (legacy).
+   - Temp directory auto-cleanup via context manager.
+
+2. **`src/claude_sync/commands/export.py`**
+   - Tambah `import getpass` di import section.
+   - Tambah password prompt menggunakan `getpass.getpass()` sebelum
+     membuat `ProjectExporter`.
+   - Validasi password tidak kosong — abort jika kosong.
+   - Pass `password=password` ke `ProjectExporter`.
+   - Tambah metadata encryption ke manifest setelah export sukses:
+     - `package_version: 2`
+     - `encrypted: True`
+     - `algorithm: "AES-256-GCM"`
+
+3. **`tests/test_export_command.py`**
+   - Tambah `input="test123\n"` ke semua panggilan `runner.invoke(app, ["export"])`
+     untuk menyediakan password via CliRunner stdin.
+
+### File yang Tidak Diubah
+- `src/claude_sync/utils/crypto.py` — tetap sebagai fondasi crypto (tidak diubah).
+- `src/claude_sync/utils/importer.py` — import belum mendukung encrypted package.
+- `src/claude_sync/commands/import_cmd.py` — import belum mendukung encrypted package.
+- `src/claude_sync/commands/status.py` — tidak disentuh.
+- `src/claude_sync/utils/config.py` — tidak disentuh.
+
+## Alasan Perubahan
+- Phase 6A menyediakan fondasi crypto (`encrypt_bytes`); Phase 6B
+  mengaktifkannya pada export flow.
+- Password diminta secara interaktif untuk keamanan — tidak pernah
+  disimpan ke file, manifest, atau project.json.
+- AES-256-GCM menyediakan authenticated encryption yang mencegah
+  package dibuka sebagai ZIP biasa.
+
+## Status
+- [x] Password prompt saat `claude-sync export`
+- [x] Validasi password tidak kosong
+- [x] Password tidak disimpan ke file/manifest/project.json
+- [x] ZIP dibuild di temp directory, dienkripsi, temporary dibersihkan
+- [x] `project.claudepack` berisi encrypted payload (AES-256-GCM)
+- [x] Manifest mencatat `package_version: 2`, `encrypted: true`,
+      `algorithm: "AES-256-GCM"`
+- [x] Error handling: password kosong, encrypt gagal, file write gagal
+      menyebabkan abort tanpa partial package
+- [x] Dokumentasi progress dan plan diperbarui
+
+## Phase 6C: Decrypt Import
+
+### Tanggal
+2026-06-09
+
+### Perubahan yang Dilakukan
+
+#### Tujuan Phase 6C
+Mengaktifkan decryption pada import flow. Setelah Phase 6C, `project.claudepack`
+yang dienkripsi oleh Phase 6B dapat diimpor kembali dengan password yang sama.
+
+#### File yang Diubah
+
+1. **`src/claude_sync/utils/crypto.py`**
+   - Tidak diubah — `decrypt_bytes()` dari Phase 6A digunakan untuk decryption.
+
+2. **`src/claude_sync/utils/importer.py`**
+   - Import `decrypt_bytes` dari `crypto.py`.
+   - Tambah parameter `password: str | None = None` ke `ProjectImporter.__init__`.
+   - Simpan `self.password` untuk digunakan saat extract claudepack.
+   - Tambah method `_is_encrypted_claudepack()` — cek apakah package dienkripsi
+     (bukan plain ZIP).
+   - Tambah method `_extract_plain_zip(extracted_dir, password)` — extract ZIP,
+     optionally decrypting if encrypted.
+   - Tambah parameter `password: str | None = None` ke `extract_claudepack()`.
+   - Panggil `_extract_plain_zip()` yang handles decryption.
+   - Tambah cleanup extracted directory setelah restore.
+   - Update `_find_claudepack_source()` — pass `self.password` ke `extract_claudepack()`.
+
+3. **`src/claude_sync/commands/import_cmd.py`**
+   - Tambah `import getpass` di import section.
+   - Tambah password prompt menggunakan `getpass.getpass()` sebelum membuat `ProjectImporter`.
+   - Validasi password tidak kosong — abort jika kosong.
+   - Pass `password=password` ke `ProjectImporter`.
+   - Password hanya diminta jika `.claudepack` ada.
+
+### File yang Tidak Diubah
+- `src/claude_sync/utils/exporter.py`, `commands/export.py` — tidak disentuh.
+- `src/claude_sync/commands/status.py`, `push.py`, `pull.py`, `trace.py` — tidak disentuh.
+- `src/claude_sync/utils/config.py`, `utils/project_path.py` — tidak diubah.
+
+### Alasan Perubahan
+- Phase 6B mengenkripsi `project.claudepack` dengan AES-256-GCM.
+- Phase 6C mengaktifkan decryption pada import flow.
+- Password diminta secara interaktif untuk keamanan — tidak pernah disimpan ke file.
+- AES-256-GCM authenticated decryption memvalidasi integritas package.
+
+### Crypto Flow
+```
+Encrypted Payload (project.claudepack)
+          ↓
+    decrypt_bytes(password)
+          ↓
+    ZIP Bytes
+          ↓
+   Extract Zip
+          ↓
+   temp/project/
+          ↓
+    Restore to Claude
+          ↓
+   Cleanup temp
+```
+
+### Status Implementation
+- [x] `decrypt_bytes()` dari `crypto.py` digunakan
+- [x] Password prompt saat `claude-sync import` (jika .claudepack ada)
+- [x] Validasi password tidak kosong
+- [x] Password tidak disimpan ke file/manifest/project.json
+- [x] Encrypted .claudepack didecrypt sebelum extract
+- [x] Temporary directory dibersihkan setelah restore
+- [x] Error handling: wrong password, corrupt package → abort dengan warning
+
+### Testing Checklist
+1. Import dari encrypted .claudepack dengan password yang benar:
+   * Decrypt berhasil
+   * Restore berhasil
+   * Session dapat ditemukan kembali
+2. Import dari encrypted .claudepack dengan password salah:
+   * Muncul error yang jelas ("Wrong password or corrupted package")
+   * Restore tidak berjalan
+3. Import from corrupted encrypted .claudepack:
+   * Muncul error
+   * Restore tidak berjalan
+4. Import dari legacy folder export (tanpa .claudepack):
+   * Tidak ada password prompt
+   * Import berjalan normal
+5. Temporary cleanup:
+   * Setelah import selesai atau gagal, `/.claude-sync/.extracted/` tidak ada
+
+---
+
+## STOP — Phase 6C selesai
+
+Phase 6D, Phase 6E, Phase 6F bukan bagian dari pekerjaan ini dan sengaja tidak
+dimulai.
+
+Tunggu hasil testing dari user.
+
+Jangan lanjut ke Phase 6D.
